@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/codemirror/lib/codemirror.css";
+// @import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import "./app/editor/tgs.css";
+@import "./app/editor/show-hint.css";
+
+body {
+  font-family: 'ViceCitySans';
+  margin: 0;
+  font-size: 15px;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  //text-align: center
+  /*background-color: #ffffff;
+  background-image: url("backgrounds/60-lines.png");*/
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+app-tools-panel {
+  font-family: Arial, Helvetica, sans-serif;
+}

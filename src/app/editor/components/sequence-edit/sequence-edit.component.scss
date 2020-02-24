@@ -1,0 +1,15 @@
+:host /deep/ .CodeMirror {
+  height: 100%;
+  //font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: RobotoMono-Regular;
+  font-size: 13px;
+  max-width: 800px;
+
+  .CodeMirror-vscrollbar {
+      visibility: hidden;
+  }
+}
+
+:host /deep/ textarea {
+  height: 100%;
+}

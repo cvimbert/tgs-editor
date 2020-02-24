@@ -1,9 +1,11 @@
 {
   "name": "tgs-editor",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "electron": "electron .",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -19,7 +21,13 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@ctrl/ngx-codemirror": "^1.3.10",
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "codemirror": "^5.45.0",
     "core-js": "^2.5.4",
+    "electron": "^7.1.9",
+    "json2typescript": "^1.2.3",
+    "ngx-electron": "^2.2.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"

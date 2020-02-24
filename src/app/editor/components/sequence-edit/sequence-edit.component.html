@@ -1,0 +1,12 @@
+<ngx-codemirror
+  [(ngModel)]="content" 
+  [options]="{
+    lineNumbers: true,
+    theme: 'material',
+    mode: 'tgs',
+    lineWrapping: true,
+    extraKeys: { 
+      'Ctrl-Space': 'autocomplete'
+    }
+  }"
+></ngx-codemirror>

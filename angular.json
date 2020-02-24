@@ -62,7 +62,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tgs-editor:build"
+            "browserTarget": "tgs-editor:build",
+            "port": 4202
           },
           "configurations": {
             "production": {
