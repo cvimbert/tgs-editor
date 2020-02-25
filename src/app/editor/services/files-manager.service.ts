@@ -20,7 +20,7 @@ export class FilesManagerService {
         if (err) {
           reject(err);
         } else {
-          resolve(data)
+          resolve(data);
         }
       });
     });

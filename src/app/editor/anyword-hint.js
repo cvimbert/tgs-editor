@@ -22,7 +22,7 @@
     var splt = curLine.substring(0, cur.ch).split(" ");
     var lastcRes = splt[splt.length - 1];
     
-    console.log(lastcRes);
+    // console.log(lastcRes);
 
     while (start && word.test(curLine.charAt(start - 1))) --start;
     var curWord = start != end && curLine.slice(start, end);
