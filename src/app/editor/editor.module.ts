@@ -8,14 +8,23 @@ import { FormsModule } from '@angular/forms';
 import './tgs';
 import 'codemirror/addon/hint/show-hint';
 import './anyword-hint';
+import { FilesManagerService } from './services/files-manager.service';
+import { NgxElectronModule } from 'ngx-electron';
 
 @NgModule({
-  declarations: [EditorComponent, SequenceEditComponent],
+  declarations: [
+    EditorComponent,
+    SequenceEditComponent
+  ],
+  providers: [
+    FilesManagerService
+  ],
   imports: [
     CommonModule,
     EditorRoutingModule,
     CodemirrorModule,
-    FormsModule
+    FormsModule,
+    NgxElectronModule
   ]
 })
 export class EditorModule { }

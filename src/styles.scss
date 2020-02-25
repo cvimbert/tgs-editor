@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/codemirror/lib/codemirror.css";
-// @import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 @import "./app/editor/tgs.css";
 @import "./app/editor/show-hint.css";
 
@@ -17,6 +17,6 @@ body {
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
-app-tools-panel {
+sequence-edit {
   font-family: Arial, Helvetica, sans-serif;
 }
