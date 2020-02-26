@@ -2,7 +2,7 @@ import { AssertionsGroupType } from '../compiler/enums/assertions-group-type.enu
 import { ParserConfiguration } from '../compiler/interfaces/parser-configuration.interface';
 
 export class TgsConfiguration {
-  
+
   static mainConfiguration: ParserConfiguration = {
     comments: [
       {
@@ -28,21 +28,21 @@ export class TgsConfiguration {
       structureElement: {
         type: AssertionsGroupType.OR,
         assertions: [
-          {
+          /*{
             id: "condition",
             reference: "conditionDeclaration",
           },
           {
             id: "script",
             reference: "script",
-          },
+          },*/
           {
             id: "gameBlock",
             reference: "gameBlock",
           }
         ]
       },
-      conditionDeclaration: {
+      /* conditionDeclaration: {
         type: AssertionsGroupType.AND,
         assertions: [
           {
@@ -59,8 +59,8 @@ export class TgsConfiguration {
             expression: /\}/
           }
         ]
-      },
-      script: {
+      }, */
+      /* script: {
         type: AssertionsGroupType.AND,
         assertions: [
           {
@@ -73,8 +73,8 @@ export class TgsConfiguration {
             reference: "commandsGroup"
           }
         ]
-      },
-      instruction: {
+      }, */
+      /* instruction: {
         type: AssertionsGroupType.OR,
         assertions: [
           {
@@ -94,8 +94,8 @@ export class TgsConfiguration {
             reference: "assignation"
           }
         ]
-      },
-      functionInstruction: {
+      }, */
+      /* functionInstruction: {
         type: AssertionsGroupType.AND,
         assertions: [
           {
@@ -177,8 +177,8 @@ export class TgsConfiguration {
             expression: /;/
           }
         ]
-      },
-      functionCall: {
+      }, */
+      /* functionCall: {
         type: AssertionsGroupType.AND,
         assertions: [
           {
@@ -271,7 +271,7 @@ export class TgsConfiguration {
             expression: /\}/
           }
         ]
-      },
+      }, */
       gameBlock: {
         type: AssertionsGroupType.AND,
         assertions: [
@@ -279,7 +279,7 @@ export class TgsConfiguration {
             id: "blockId",
             reference: "blockId"
           },
-          {
+          /* {
             id: "modifiers",
             reference: "blockModifier",
             iterator: "*"
@@ -288,7 +288,7 @@ export class TgsConfiguration {
             id: "scripts",
             reference: "script",
             iterator: "*"
-          },
+          }, */
           {
             id: "blockLines",
             reference: "complexTextBlock",
@@ -314,7 +314,7 @@ export class TgsConfiguration {
           }
         ]
       },
-      blockModifier: {
+      /* blockModifier: {
         type: AssertionsGroupType.AND,
         assertions: [
           {
@@ -328,14 +328,10 @@ export class TgsConfiguration {
             iterator: "+"
           }
         ]
-      },
-      nestedGameBlock: {
+      }, */
+      /* nestedGameBlock: {
         type: AssertionsGroupType.AND,
         assertions: [
-          /*{
-            id: "opener",
-            expression: /##/
-          },*/
           {
             id: "blockId",
             reference: "nestedBlockId"
@@ -365,30 +361,12 @@ export class TgsConfiguration {
             expression: /##/
           }
         ]
-      },
+      }, */
       blockId: {
         assertions: [
           {
             id: "blockId",
             expression: /\#([A-Za-z0-9]+)/,
-            groups: ["id"]
-          }
-        ]
-      },
-      blockIdEOL: {
-        assertions: [
-          {
-            id: "blockId",
-            expression: /\#([A-Za-z0-9]+)[\n\r]/,
-            groups: ["id"]
-          }
-        ]
-      },
-      nestedBlockId: {
-        assertions: [
-          {
-            id: "blockId",
-            expression: /\#\#([A-Za-z0-9]+)/,
             groups: ["id"]
           }
         ]
@@ -465,16 +443,16 @@ export class TgsConfiguration {
       blockLine2: {
         type: AssertionsGroupType.AND,
         assertions: [
-          {
+          /* {
             id: "condition",
             reference: "conditionInParenthesis",
             iterator: "?"
-          },
-          {
+          }, */
+          /* {
             id: "format",
             reference: "formats",
             iterator: "?"
-          },
+          }, */
           {
             id: "blockline",
             expression: /(?!#|\s*\*|\s*\]|\s*\>|\s*\r\n)(.*?)(?=[\n\r\[\]\<\>])/,
@@ -777,7 +755,7 @@ export class TgsConfiguration {
         ]
       },
       // A implémenter
-      conditionalBlockModifierItem: {
+      /* conditionalBlockModifierItem: {
         type: AssertionsGroupType.OR,
         assertions: [
           {
@@ -789,18 +767,18 @@ export class TgsConfiguration {
             reference: "conditionInParenthesis",
           }
         ]
-      },
+      }, */
       complexTextBlock: {
         type: AssertionsGroupType.OR,
         assertions: [
-          {
+          /* {
             id: "conditionalBlock",
             reference: "conditionalBlock"
-          },
-          {
+          }, */
+          /* {
             id: "tag",
             reference: "elementTag"
-          },
+          }, */
           {
             id: "simpleLine",
             reference: "blockLine"
@@ -814,29 +792,29 @@ export class TgsConfiguration {
             id: "opener",
             expression: /\*/
           },
-          {
+          /* {
             id: "modifiers",
             reference: "linkModifierItem",
             iterator: "*"
-          },
+          }, */
           {
             id: "simpleLinkText",
             expression: /(.*?)\s*->/,
             groups: ["text"]
           },
-          {
+          /* {
             id: "link",
             reference: "slink",
             iterator: "?"
-          },
-          {
+          }, */
+          /* {
             id: "nestedBlock",
             reference: "nestedGameBlock",
             iterator: "?"
-          }
+          } */
         ]
       },
-      linkModifierItem: {
+      /* linkModifierItem: {
         type: AssertionsGroupType.OR,
         assertions: [
           {
@@ -848,8 +826,8 @@ export class TgsConfiguration {
             reference: "conditionInParenthesis",
           }
         ]
-      },
-      linkDirectives: {
+      }, */
+      /* linkDirectives: {
         type: AssertionsGroupType.AND,
         assertions: [
           {
@@ -866,8 +844,8 @@ export class TgsConfiguration {
             expression: /\]/
           }
         ]
-      },
-      linkDirective: {
+      }, */
+      /* linkDirective: {
         type: AssertionsGroupType.AND,
         assertions: [
           {
@@ -894,7 +872,7 @@ export class TgsConfiguration {
             groups: ["name"]
           }
         ]
-      },
+      }, */
       directLink: {
         type: AssertionsGroupType.AND,
         assertions: [
@@ -902,11 +880,11 @@ export class TgsConfiguration {
             id: "opener",
             expression: /\*/
           },
-          {
+          /* {
             id: "condition",
             reference: "conditionInParenthesis",
             iterator: "?"
-          },
+          }, */
           {
             id: "arrow",
             expression: /=>/
@@ -918,7 +896,7 @@ export class TgsConfiguration {
           }
         ]
       },
-      conditionInParenthesis: {
+      /* conditionInParenthesis: {
         type: AssertionsGroupType.AND,
         assertions: [
           {
@@ -934,8 +912,8 @@ export class TgsConfiguration {
             expression: /\)/
           }
         ]
-      },
-      entry: {
+      }, */
+      /* entry: {
         assertions: [
           {
             id: "start",
@@ -943,7 +921,7 @@ export class TgsConfiguration {
             iterator: "*"
           }
         ]
-      }
+      } */
     },
     entry: "mainFileStructure"
   }
