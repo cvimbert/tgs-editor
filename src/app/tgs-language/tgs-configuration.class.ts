@@ -802,11 +802,11 @@ export class TgsConfiguration {
             expression: /(.*?)\s*->/,
             groups: ["text"]
           },
-          /* {
+          {
             id: "link",
             reference: "slink",
             iterator: "?"
-          }, */
+          },
           /* {
             id: "nestedBlock",
             reference: "nestedGameBlock",
