@@ -1,4 +1,5 @@
-<ngx-codemirror
+<div class="container">
+  <ngx-codemirror
   [(ngModel)]="content" 
   [options]="{
     lineNumbers: true,
@@ -9,4 +10,6 @@
       'Ctrl-Space': 'autocomplete'
     }
   }"
-></ngx-codemirror>
+  ></ngx-codemirror>
+</div>
+

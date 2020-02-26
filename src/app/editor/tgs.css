@@ -47,10 +47,12 @@
   color: rgba(199, 146, 234, 1);
   font-weight: bold;
   font-size: 17px;
+  font-family: monospace;
 }
 .cm-s-material .cm-linkb {
   color: rgb(255, 74, 98);
   font-weight: bold;
+  font-family: monospace;
 }
 .cm-s-material .cm-linkref {
   color: rgb(239, 210, 100);
@@ -59,6 +61,7 @@
 .cm-linkref-local {
   color: rgba(199, 146, 234, 1);
   font-weight: bold;
+  font-family: monospace;
 }
 .cm-extension-ref {
   color: rgba(199, 146, 234, 1);

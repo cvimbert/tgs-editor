@@ -1,5 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { FilesManagerService } from '../../services/files-manager.service';
+import { Compiler } from 'src/app/compiler/compiler.class';
+import { TgsConfiguration } from 'src/app/tgs-language/tgs-configuration.class';
 
 @Component({
   selector: 'sequence-edit',
@@ -8,8 +10,9 @@ import { FilesManagerService } from '../../services/files-manager.service';
 })
 export class SequenceEditComponent implements OnInit {
 
-  private content = "";
+  content = "";
   private path = "projects/p1/index.tgs";
+  private compiler = new Compiler(TgsConfiguration.mainConfiguration);
 
   constructor(
     private filesManager: FilesManagerService
@@ -21,7 +24,15 @@ export class SequenceEditComponent implements OnInit {
 
   loadFile(path: string) {
     this.content = "";
-    this.filesManager.loadFile(path).then(txt => this.content = txt);
+    this.filesManager.loadFile(path).then(content => {
+      this.content = content;
+      this.compileContent();
+    });
+  }
+
+  compileContent() {
+    let res = this.compiler.parseTGSString(this.content);
+    console.log(res);
   }
 
   saveFile(path: string) {
