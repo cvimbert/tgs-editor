@@ -1,12 +1,9 @@
 import { CompilerResult } from './compiler-result.class';
 import { ParserConfiguration } from './interfaces/parser-configuration.interface';
-import { AssertionsGroup } from './interfaces/assertions-group.interface';
 import { AssertionsGroupType } from './enums/assertions-group-type.enum';
 import { Assertion } from './interfaces/assertion.interface';
 
 export class Compiler {
-
-  // private configuration: ParserConfiguration = Configuration.mainConfiguration;
 
   constructor(
     private configuration: ParserConfiguration
@@ -14,25 +11,18 @@ export class Compiler {
 
   parseTGSString(text: string): CompilerResult {
 
-    // comments stripping (à déplacer)
-    /*this.configuration.comments.forEach(assertion => {
-      text = text.replace(assertion.expression, "");
-    });*/
+    // A voir si c'est utile
+    // text = text.replace(/\r?\n|\r/g, "\n");
 
-    // pas bon
-    //text = text.replace(/^\s*/, "");
-
-    text = text.replace(/\r?\n|\r/g, "\n");
-
-    let res: CompilerResult = this.parseStringAt(text, this.configuration.entry);
+    let res = this.parseStringAt(text, this.configuration.entry);
     return res;
   }
 
   parseStringAt(text: string, dictionaryTerm: string, index: number = 0): CompilerResult {
-    let group: AssertionsGroup = this.configuration.dictionary[dictionaryTerm];
+    let group = this.configuration.dictionary[dictionaryTerm];
 
     // pas possible de trouver un id pour le moment. D'ailleurs id pas nécessaire normalement.
-    let globalResult: CompilerResult = new CompilerResult(text, index);
+    let globalResult = new CompilerResult(text, index);
 
     let cc = text.charAt(index);
 
@@ -50,7 +40,7 @@ export class Compiler {
       let results: CompilerResult[] = [];
 
       for (let assertion of group.assertions) {
-        let res: CompilerResult[] = this.evaluateAssertion(text, assertion, index);
+        let res = this.evaluateAssertion(text, assertion, index);
 
         if (res) {
           index = res.length > 0 ? res[res.length - 1].index : index;
@@ -73,7 +63,7 @@ export class Compiler {
       // un seul résultat, le premier positif de la liste (évaluation dans l'ordre du tableau)
 
       for (let assertion of group.assertions) {
-        let res: CompilerResult[] = this.evaluateAssertion(text, assertion, index);
+        let res = this.evaluateAssertion(text, assertion, index);
 
         if (res) {
           if (res.length > 0) {
@@ -94,7 +84,7 @@ export class Compiler {
         console.error(`No type for group: "${ dictionaryTerm }". One and only one assertion required.`);
       }
 
-      let res: CompilerResult[] = this.evaluateAssertion(text, group.assertions[0], index);
+      let res = this.evaluateAssertion(text, group.assertions[0], index);
 
       if (res && res.length > 0) {
         index = res ? res[0].index : index;
@@ -113,7 +103,7 @@ export class Compiler {
   evaluateAssertion(text: string, assertion: Assertion, index: number = 0): CompilerResult[] {
     // cas d'itération: * (0 et plus), + (1 et plus), ? (0 ou 1), et defaut (1)
     let subRes: CompilerResult[] = [];
-    let currentRes: CompilerResult = this.evaluateAssertionIteration(text, assertion, index);
+    let currentRes = this.evaluateAssertionIteration(text, assertion, index);
 
     if (assertion.iterator === "?" || assertion.iterator === "*") {
       if (!currentRes) {
@@ -128,11 +118,9 @@ export class Compiler {
     let count: number = 0;
 
     while (currentRes) {
-      //console.log("ici");
       subRes.push(currentRes);
 
       if (assertion.iterator === "*" || assertion.iterator === "+") {
-        //console.log(currentRes.index);
 
         let lastIndex: number = currentRes.index;
         currentRes = this.evaluateAssertionIteration(text, assertion, currentRes.index);
@@ -158,16 +146,12 @@ export class Compiler {
   }
 
   evaluateAssertionIteration(text: string, assertion: Assertion, index: number): CompilerResult {
-    let croppedText: string = text.substring(index);
+    let croppedText = text.substring(index);
 
     if (assertion.expression) {
 
-      let regExpAdditions: string = "^";
+      let regExpAdditions = "^";
       regExpAdditions += !assertion.leaveStartSpaces ? "\\s*" : "";
-
-      // strip comments
-
-      // pas bon du tout !!!
       
       this.configuration.comments.forEach(comment => {
         regExpAdditions += comment.expression.source;
@@ -177,12 +161,10 @@ export class Compiler {
 
       let exp = new RegExp(regExpAdditions + assertion.expression.source);
 
-      let expRes: RegExpExecArray = exp.exec(croppedText);
+      let expRes = exp.exec(croppedText);
 
       if (expRes) {
         let newIndex: number = index + expRes[0].length;
-
-        //console.log(newIndex, index);
 
         let res = new CompilerResult(text, newIndex);
 
@@ -200,7 +182,7 @@ export class Compiler {
 
     } else if (assertion.reference) {
 
-      let targetResult: CompilerResult = this.parseStringAt(text, assertion.reference, index);
+      let targetResult = this.parseStringAt(text, assertion.reference, index);
       return targetResult;
     }
 

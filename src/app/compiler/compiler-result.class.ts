@@ -32,7 +32,7 @@ export class CompilerResult {
 
     this.results[assertionName] = results;
 
-    let newIndex: number = results.length > 0 ? results[results.length - 1].index : 0;
+    let newIndex = results.length > 0 ? results[results.length - 1].index : 0;
 
     if (this.startIndex === undefined) {
       this.startIndex = newIndex;
@@ -59,8 +59,8 @@ export class CompilerResult {
 
   getResultsByArray(splittedPath: string[], index: number = 0): CompilerResult[] {
 
-    let pathElem: string = splittedPath[index];
-    let currentRes: CompilerResult[] = this.getResultsAtKey(pathElem);
+    let pathElem = splittedPath[index];
+    let currentRes = this.getResultsAtKey(pathElem);
 
     if (!currentRes) return null;
 
@@ -93,12 +93,12 @@ export class CompilerResult {
   }
 
   getFirstResult(path: string): CompilerResult {
-    let results: CompilerResult[] = this.getResults(path);
+    let results = this.getResults(path);
     return results ? results[0] : null;
   }
 
   getFirstValue(path: string): string {
-    let values: string[] = this.getValue(path);
+    let values = this.getValue(path);
     return values ? values[0] : null;
   }
 
@@ -108,11 +108,11 @@ export class CompilerResult {
       return null;
     }
 
-    let splitted: string[] = path.split("@");
-    let pathElem: string = splitted[0];
-    let resName: string = splitted[1];
+    let splitted = path.split("@");
+    let pathElem = splitted[0];
+    let resName = splitted[1];
 
-    let res: CompilerResult[] = this.getResults(pathElem);
+    let res = this.getResults(pathElem);
     let groupsRes: string[] = [];
 
     if (res) {
