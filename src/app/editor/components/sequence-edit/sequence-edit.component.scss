@@ -2,7 +2,7 @@
   height: 100%;
   font-family: sans-serif;
   font-size: 13px;
-  max-width: 800px;
+  // max-width: 800px;
 
   .CodeMirror-vscrollbar {
       visibility: hidden;
@@ -13,8 +13,27 @@
   height: 100%;
 }
 
+ngx-codemirror {
+  flex: 1;
+}
+
+.blocks-list {
+  width: 200px;
+  background-color: lightskyblue;
+
+  .block-button {
+    background-color: lightsalmon;
+  }
+}
+
+.sequence-preview {
+  width: 400px;
+  background-color: lightgreen;
+}
+
 .container {
   position: fixed;
   width: 100%;
   height: 100%;
+  display: flex;
 }

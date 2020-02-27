@@ -5,7 +5,7 @@ export let tgsMain: LNodeData = {
   id: "main",
   groups: {
     id: "main",
-    reference: TgsNodesDictionary.STRUCTURE_ELEMENT,
+    // reference: TgsNodesDictionary.STRUCTURE_ELEMENT,
     iterator: "*"
   }
 };
