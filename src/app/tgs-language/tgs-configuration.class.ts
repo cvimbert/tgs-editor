@@ -1,7 +1,10 @@
 import { AssertionsGroupType } from '../compiler/enums/assertions-group-type.enum';
 import { ParserConfiguration } from '../compiler/interfaces/parser-configuration.interface';
+import { tgsMain } from './elements/main.object';
 
 export class TgsConfiguration {
+
+  mm = tgsMain;
 
   static mainConfiguration: ParserConfiguration = {
     comments: [
