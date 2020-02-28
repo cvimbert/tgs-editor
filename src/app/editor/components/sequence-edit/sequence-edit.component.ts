@@ -1,9 +1,9 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { FilesManagerService } from '../../services/files-manager.service';
-import { Compiler } from 'src/app/compiler/compiler.class';
-import { TgsConfiguration } from 'src/app/tgs-language/tgs-configuration.class';
+import { Compiler } from 'tgs-compiler/index';
+import { TgsConfiguration } from 'tgs-language/tgs-configuration.class';
 import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
-import { MainStructure } from 'src/app/tgs-language/model/model';
+import { MainStructure } from 'tgs-model';
 
 @Component({
   selector: 'sequence-edit',

@@ -30,7 +30,9 @@
     "ngx-electron": "^2.2.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "tgs-model": "file:./tgs-language/model",
+    "tgs-compiler": "file:./compiler"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",

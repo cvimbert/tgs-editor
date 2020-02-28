@@ -4,6 +4,11 @@
     "outDir": "../out-tsc/app",
     "types": []
   },
+  "include": [
+    "**/*.ts",
+    "../node_modules/tgs-compiler/**/*.ts",
+    "../node_modules/tgs-model/**/*.ts",
+  ],
   "exclude": [
     "test.ts",
     "**/*.spec.ts"

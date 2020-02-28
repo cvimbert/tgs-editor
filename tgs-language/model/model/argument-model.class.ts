@@ -1,5 +1,5 @@
-import { ArgumentType } from "../enums/argument-type.enum";
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
+import { ArgumentType } from "./enums/argument-type.enum";
+import { CompilerResult } from 'tgs-compiler/index';
 import { FunctionModel } from "./function-model.class";
 
 export class ArgumentModel {

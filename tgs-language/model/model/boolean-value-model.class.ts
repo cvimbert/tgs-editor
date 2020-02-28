@@ -1,4 +1,4 @@
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
+import { CompilerResult } from 'tgs-compiler/index';
 import { BooleanComparisonModel } from "./boolean-comparison-model.class";
 
 export class BooleanValueModel {

@@ -1,4 +1,4 @@
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
+import { CompilerResult } from 'tgs-compiler/index';
 import { ConditionModel } from "./condition-model.class";
 
 export class ComplexConditionModel {

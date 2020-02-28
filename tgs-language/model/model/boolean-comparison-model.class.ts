@@ -1,5 +1,5 @@
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
-import { ComparisonOperator } from "../enums/comparison-operator.enum";
+import { CompilerResult } from 'tgs-compiler/index';
+import { ComparisonOperator } from "./enums/comparison-operator.enum";
 import { ComparisonOperandModel } from "./comparison-operand-model.class";
 
 export class BooleanComparisonModel {

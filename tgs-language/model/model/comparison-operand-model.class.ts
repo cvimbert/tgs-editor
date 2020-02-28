@@ -1,6 +1,6 @@
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
-import { ComparisonOperandType } from "../enums/comparison-operand-type.enum";
-import { PrimitiveType } from "../enums/primitive-type.enum";
+import { CompilerResult } from 'tgs-compiler/index';
+import { ComparisonOperandType } from "./enums/comparison-operand-type.enum";
+import { PrimitiveType } from "./enums/primitive-type.enum";
 
 export class ComparisonOperandModel {
 

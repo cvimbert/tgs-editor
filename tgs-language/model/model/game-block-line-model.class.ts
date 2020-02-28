@@ -1,9 +1,9 @@
 import { ConditionModel } from "./condition-model.class";
-import { BlockLineType } from "./enums/block-line-types.enum";
 import { TagModel } from "./tag-model.class";
 import { ComplexConditionModel } from "./complex-condition-model.class";
 import { ScriptModel } from "./script-model.class";
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
+import { CompilerResult } from 'tgs-compiler/index';
+import { BlockLineType } from "tgs-model/enums/block-line-types.enum";
 
 export class GameBlockLineModel {
 

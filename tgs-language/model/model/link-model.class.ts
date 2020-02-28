@@ -1,4 +1,4 @@
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
+import { CompilerResult } from 'tgs-compiler';
 import { LinkDirectiveModel } from "./link-directive-model.class";
 import { ComplexConditionModel } from "./complex-condition-model.class";
 import { GameBlockModel } from "./game-block-model.class";

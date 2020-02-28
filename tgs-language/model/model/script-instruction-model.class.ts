@@ -1,5 +1,5 @@
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
-import { ScriptInstructionType } from "../enums/script-instruction-type.enum";
+import { CompilerResult } from 'tgs-compiler/index';
+import { ScriptInstructionType } from "./enums/script-instruction-type.enum";
 import { ConditionModel } from "./condition-model.class";
 import { ArgumentModel } from "./argument-model.class";
 import { ComparisonOperandModel } from './comparison-operand-model.class';

@@ -1,4 +1,4 @@
-import { CompilerResult } from 'src/app/compiler/compiler-result.class';
+import { CompilerResult } from 'tgs-compiler/index';
 import { GameBlockLineModel } from "./game-block-line-model.class";
 import { LinkModel } from "./link-model.class";
 import { ScriptModel } from "./script-model.class";
