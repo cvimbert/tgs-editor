@@ -1,7 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { FilesManagerService } from '../../services/files-manager.service';
 import { Compiler } from 'src/app/compiler/compiler.class';
 import { TgsConfiguration } from 'src/app/tgs-language/tgs-configuration.class';
+import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
+import { MainStructure } from 'src/app/tgs-language/model/model';
 
 @Component({
   selector: 'sequence-edit',
@@ -11,8 +13,12 @@ import { TgsConfiguration } from 'src/app/tgs-language/tgs-configuration.class';
 export class SequenceEditComponent implements OnInit {
 
   content = "";
+  sequenceModel: MainStructure;
   private path = "projects/p1/index.tgs";
   private compiler = new Compiler(TgsConfiguration.mainConfiguration);
+
+  @ViewChild("editor") editor: CodemirrorComponent;
+
 
   constructor(
     private filesManager: FilesManagerService
@@ -26,13 +32,17 @@ export class SequenceEditComponent implements OnInit {
     this.content = "";
     this.filesManager.loadFile(path).then(content => {
       this.content = content;
+
+      setTimeout(() => this.editor.codeMirror.getDoc().clearHistory());
+
       this.compileContent();
     });
   }
 
   compileContent() {
     let res = this.compiler.parseTGSString(this.content);
-    console.log(res);
+    this.sequenceModel = MainStructure.loadFromCompilerResult(res);
+    console.log(this.sequenceModel);
   }
 
   saveFile(path: string) {
