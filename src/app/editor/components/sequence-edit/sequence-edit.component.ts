@@ -3,7 +3,7 @@ import { FilesManagerService } from '../../services/files-manager.service';
 import { Compiler } from 'tgs-compiler/index';
 import { TgsConfiguration } from 'tgs-language/tgs-configuration.class';
 import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
-import { MainStructure } from 'tgs-model';
+import { MainStructure, TgsMainStructure } from 'tgs-model';
 
 @Component({
   selector: 'sequence-edit',
@@ -26,6 +26,8 @@ export class SequenceEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadFile(this.path);
+    console.log(TgsMainStructure["assertions"]);
+    
   }
 
   loadFile(path: string) {

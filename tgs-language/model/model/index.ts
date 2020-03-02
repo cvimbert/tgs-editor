@@ -1,4 +1,5 @@
-export { BlockLineType } from 'tgs-model/enums/block-line-types.enum';
+export { TgsMainStructure } from './new-model/tgs-main-structure.class';
+export { BlockLineType } from '../enums/block-line-types.enum';
 export { PrimitiveType } from './enums/primitive-type.enum';
 export { BooleanValueModel } from './boolean-value-model.class';
 export { LinkDirectiveModel } from './link-directive-model.class';

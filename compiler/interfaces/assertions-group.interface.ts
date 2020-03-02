@@ -4,4 +4,5 @@ import { Assertion } from "./assertion.interface";
 export interface AssertionsGroup {
   type?: AssertionsGroupType;
   assertions: Assertion[];
+  sub?: { [key: string]: AssertionsGroup };
 }

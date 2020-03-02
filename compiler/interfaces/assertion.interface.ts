@@ -2,7 +2,7 @@ export interface Assertion {
   id: string;
   expression?: RegExp;
   groups?: string[];
-  reference?: string;
+  reference?: any;
   iterator?: string;
   leaveStartSpaces?: boolean;
 }

@@ -1,7 +1,7 @@
 import { ScriptModel } from "./script-model.class";
 import { ConditionModel } from "./condition-model.class";
 import { BlockModifierModel } from "./block-modifier-model.class";
-import { CompilerResult } from 'tgs-compiler/index';
+import { CompilerResult } from 'tgs-compiler';
 import { GameBlockModel } from './game-block-model.class';
 
 export class MainStructure {
