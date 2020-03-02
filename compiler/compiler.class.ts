@@ -9,7 +9,7 @@ export class Compiler {
     private configuration: ParserConfiguration
   ) {}
 
-  parseTGSString(text: string): CompilerResult {
+  parseTGSString(text: string, constructorFunc: any): CompilerResult {
 
     // A voir si c'est utile
     // text = text.replace(/\r?\n|\r/g, "\n");

@@ -26,8 +26,7 @@ export class SequenceEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadFile(this.path);
-    console.log(TgsMainStructure["assertions"]);
-    
+    // console.log(TgsMainStructure["assertions"]);
   }
 
   loadFile(path: string) {
@@ -42,7 +41,7 @@ export class SequenceEditComponent implements OnInit {
   }
 
   compileContent() {
-    let res = this.compiler.parseTGSString(this.content);
+    let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
     this.sequenceModel = MainStructure.loadFromCompilerResult(res);
     console.log(this.sequenceModel);
   }
