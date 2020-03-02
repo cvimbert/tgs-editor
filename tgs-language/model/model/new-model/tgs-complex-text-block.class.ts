@@ -1,4 +1,5 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
+import { TgsGameBlockLine } from './tgs-game-block-line.class';
 
 export class TgsComplexTextBlock extends BaseLanguageItem {
 
@@ -7,7 +8,7 @@ export class TgsComplexTextBlock extends BaseLanguageItem {
     assertions: [
       {
         id: "simpleLine",
-        reference: "blockLine"
+        reference: TgsGameBlockLine
       }
     ]
   };

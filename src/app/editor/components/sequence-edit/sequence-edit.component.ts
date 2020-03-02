@@ -41,9 +41,9 @@ export class SequenceEditComponent implements OnInit {
   }
 
   compileContent() {
-    let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
-    this.sequenceModel = MainStructure.loadFromCompilerResult(res);
-    console.log(this.sequenceModel);
+    let res = this.compiler.parseTGSStringNew(this.content, TgsMainStructure);
+    // this.sequenceModel = MainStructure.loadFromCompilerResult(res);
+    console.log(res);
   }
 
   saveFile(path: string) {
