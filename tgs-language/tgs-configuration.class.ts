@@ -1,5 +1,5 @@
-import { AssertionsGroupType } from '../compiler/enums/assertions-group-type.enum';
-import { ParserConfiguration } from '../compiler/interfaces/parser-configuration.interface';
+import { AssertionsGroupType } from 'tgs-compiler/src/enums/assertions-group-type.enum';
+import { ParserConfiguration } from 'tgs-compiler/src/interfaces/parser-configuration.interface';
 
 
 export class TgsConfiguration {

@@ -17,17 +17,21 @@ export class Compiler {
 
     let group: AssertionsGroup;
     // let nextItem: BaseLanguageItem;
+    let globalResult;
 
     if (typeof languageElement === "string") {
       group = languageNode["assertions"].sub[languageElement];
+      globalResult = new CompilerResult(text, index);
+
     } else {
       group = languageElement["assertions"];
 
-      let globalCont = new languageElement();
+      // let globalCont = new languageElement();
 
-      console.log(globalCont);
+      // console.log(globalCont);
       // item = group.assertions;
       // console.log(item);
+      globalResult = new languageElement(text, index);
       languageNode = languageElement;
     }
 
@@ -36,10 +40,6 @@ export class Compiler {
     }
 
     // pas possible de trouver un id pour le moment. D'ailleurs id pas nécessaire normalement.
-    let globalResult = new CompilerResult(text, index);
-    
-    
-
     let cc = text.charAt(index);
 
     while(cc && cc.match(/\s/)) {
@@ -194,10 +194,18 @@ export class Compiler {
       if (expRes) {
         let newIndex: number = index + expRes[0].length;
 
-        let res = new CompilerResult(text, newIndex);
-        let sres = new languageNode();
+        let res: CompilerResult;
 
-        console.log(sres);
+        if (!assertion.reference || typeof assertion.reference === "string") {
+          res = new CompilerResult(text, newIndex);
+        } else {
+          res = new assertion.reference(text, newIndex);
+        }
+
+        // let res = new CompilerResult(text, newIndex);
+        // let sres = new languageNode();
+
+        // console.log(sres);
         
 
         // Il faut injecter le résultat dans un objet déjà instancié si il existe,

@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { FilesManagerService } from '../../services/files-manager.service';
 import { Compiler } from 'tgs-compiler/index';
-import { TgsConfiguration } from 'tgs-language/tgs-configuration.class';
 import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
 import { MainStructure, TgsMainStructure } from 'tgs-model';
 

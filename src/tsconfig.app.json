@@ -6,8 +6,8 @@
   },
   "include": [
     "**/*.ts",
-    "../node_modules/tgs-compiler/**/*.ts",
     "../node_modules/tgs-model/**/*.ts",
+    "../node_modules/tgs-compiler/**/*.ts"
   ],
   "exclude": [
     "test.ts",
