@@ -1,5 +1,5 @@
-export class BaseLanguageItem {
-  
-  assertionsMainResults: { [key: string]: any[] } = {};
+import { CompilerResult } from './compiler-result.class';
 
+export class BaseLanguageItem extends CompilerResult {
+  
 }

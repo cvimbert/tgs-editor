@@ -7,23 +7,27 @@ import { BaseLanguageItem } from './base-language-item.class';
 export class Compiler {
 
   parseTGSString(text: string, languageElement: any): CompilerResult {
-    let container = new languageElement();
-    return this.parseStringAt(text, languageElement, languageElement, container);
+    // let container = new languageElement();
+    let res = this.parseStringAt(text, languageElement, languageElement, null);
+    // console.log(container);
+    return res;
   }
 
   parseStringAt(text: string, languageElement: any, languageNode: any, container: BaseLanguageItem, index: number = 0): CompilerResult {
 
     let group: AssertionsGroup;
-    let item: BaseLanguageItem;
+    // let nextItem: BaseLanguageItem;
 
     if (typeof languageElement === "string") {
       group = languageNode["assertions"].sub[languageElement];
     } else {
       group = languageElement["assertions"];
 
+      let globalCont = new languageElement();
+
+      console.log(globalCont);
       // item = group.assertions;
       // console.log(item);
-
       languageNode = languageElement;
     }
 
@@ -33,6 +37,8 @@ export class Compiler {
 
     // pas possible de trouver un id pour le moment. D'ailleurs id pas nécessaire normalement.
     let globalResult = new CompilerResult(text, index);
+    
+    
 
     let cc = text.charAt(index);
 
@@ -59,6 +65,17 @@ export class Compiler {
 
           if (res.length > 0) {
             globalResult.addResults(assertion.id, res);
+
+            // console.log(typeof assertion.reference);
+            
+
+            if (assertion.reference && typeof assertion.reference !== "string") {
+              let item = new assertion.reference();
+              // container.assertionsMainResults[assertion.id] = [item];
+            } else {
+              //
+            }
+
           }
 
           globalResult.index = index;
@@ -178,6 +195,10 @@ export class Compiler {
         let newIndex: number = index + expRes[0].length;
 
         let res = new CompilerResult(text, newIndex);
+        let sres = new languageNode();
+
+        console.log(sres);
+        
 
         // Il faut injecter le résultat dans un objet déjà instancié si il existe,
         // Sinon le créer
