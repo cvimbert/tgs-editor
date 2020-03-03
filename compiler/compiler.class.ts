@@ -7,10 +7,11 @@ import { BaseLanguageItem } from './base-language-item.class';
 export class Compiler {
 
   parseTGSString(text: string, languageElement: any): CompilerResult {
-    return this.parseStringAt(text, languageElement, languageElement);
+    let container = new languageElement();
+    return this.parseStringAt(text, languageElement, languageElement, container);
   }
 
-  parseStringAt(text: string, languageElement: any, languageNode: any, index: number = 0): CompilerResult {
+  parseStringAt(text: string, languageElement: any, languageNode: any, container: BaseLanguageItem, index: number = 0): CompilerResult {
 
     let group: AssertionsGroup;
     let item: BaseLanguageItem;
@@ -49,7 +50,7 @@ export class Compiler {
       let results: CompilerResult[] = [];
 
       for (let assertion of group.assertions) {
-        let res = this.evaluateAssertion(text, assertion, languageNode, index);
+        let res = this.evaluateAssertion(text, assertion, languageNode, container, index);
 
         if (res) {
           index = res.length > 0 ? res[res.length - 1].index : index;
@@ -72,7 +73,7 @@ export class Compiler {
       // un seul résultat, le premier positif de la liste (évaluation dans l'ordre du tableau)
 
       for (let assertion of group.assertions) {
-        let res = this.evaluateAssertion(text, assertion, languageNode, index);
+        let res = this.evaluateAssertion(text, assertion, languageNode, container, index);
 
         if (res) {
           if (res.length > 0) {
@@ -94,7 +95,7 @@ export class Compiler {
         console.error(`No type for group. One and only one assertion required.`);
       }
 
-      let res = this.evaluateAssertion(text, group.assertions[0], languageNode, index);
+      let res = this.evaluateAssertion(text, group.assertions[0], languageNode, container, index);
 
       if (res && res.length > 0) {
         index = res ? res[0].index : index;
@@ -110,10 +111,10 @@ export class Compiler {
     }
   }
 
-  evaluateAssertion(text: string, assertion: Assertion, languageNode: any, index: number = 0): CompilerResult[] {
+  evaluateAssertion(text: string, assertion: Assertion, languageNode: any, container: BaseLanguageItem, index: number = 0): CompilerResult[] {
     // cas d'itération: * (0 et plus), + (1 et plus), ? (0 ou 1), et defaut (1)
     let subRes: CompilerResult[] = [];
-    let currentRes = this.evaluateAssertionIteration(text, assertion, languageNode, index);
+    let currentRes = this.evaluateAssertionIteration(text, assertion, languageNode, container, index);
 
     if (assertion.iterator === "?" || assertion.iterator === "*") {
       if (!currentRes) {
@@ -133,7 +134,7 @@ export class Compiler {
       if (assertion.iterator === "*" || assertion.iterator === "+") {
 
         let lastIndex: number = currentRes.index;
-        currentRes = this.evaluateAssertionIteration(text, assertion, languageNode, currentRes.index);
+        currentRes = this.evaluateAssertionIteration(text, assertion, languageNode, container, currentRes.index);
 
         if (currentRes && currentRes.index === lastIndex) {
           // erreur bizarre de redondance de l'index. A voir
@@ -155,7 +156,7 @@ export class Compiler {
     return subRes;
   }
 
-  evaluateAssertionIteration(text: string, assertion: Assertion, languageNode: any, index: number): CompilerResult {
+  evaluateAssertionIteration(text: string, assertion: Assertion, languageNode: any, container: BaseLanguageItem, index: number): CompilerResult {
     let croppedText = text.substring(index);
 
     if (assertion.expression) {
@@ -198,7 +199,7 @@ export class Compiler {
 
     } else if (assertion.reference) {
 
-      let targetResult = this.parseStringAt(text, assertion.reference, languageNode, index);
+      let targetResult = this.parseStringAt(text, assertion.reference, languageNode, container, index);
       return targetResult;
     }
 
