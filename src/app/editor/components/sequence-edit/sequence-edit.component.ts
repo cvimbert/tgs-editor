@@ -15,7 +15,7 @@ export class SequenceEditComponent implements OnInit {
   content = "";
   sequenceModel: MainStructure;
   private path = "projects/p1/index.tgs";
-  private compiler = new Compiler(TgsConfiguration.mainConfiguration);
+  private compiler = new Compiler();
 
   @ViewChild("editor") editor: CodemirrorComponent;
 
@@ -26,7 +26,6 @@ export class SequenceEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadFile(this.path);
-    // console.log(TgsMainStructure["assertions"]);
   }
 
   loadFile(path: string) {
@@ -41,8 +40,7 @@ export class SequenceEditComponent implements OnInit {
   }
 
   compileContent() {
-    let res = this.compiler.parseTGSStringNew(this.content, TgsMainStructure);
-    // this.sequenceModel = MainStructure.loadFromCompilerResult(res);
+    let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
     console.log(res);
   }
 

@@ -9,6 +9,7 @@ export class TgsMainStructure extends BaseLanguageItem {
       {
         id: "gameBlock",
         reference: TgsGameBlock,
+        iterator: "*"
       }
     ]
   };
