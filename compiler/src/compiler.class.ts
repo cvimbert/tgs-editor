@@ -1,4 +1,3 @@
-import { CompilerResult } from './compiler-result.class';
 import { AssertionsGroupType } from './enums/assertions-group-type.enum';
 import { Assertion } from './interfaces/assertion.interface';
 import { AssertionsGroup } from './interfaces/assertions-group.interface';
@@ -6,31 +5,25 @@ import { BaseLanguageItem } from './base-language-item.class';
 
 export class Compiler {
 
-  parseTGSString(text: string, languageElement: any): CompilerResult {
+  parseTGSString(text: string, languageElement: any): BaseLanguageItem {
     // let container = new languageElement();
     let res = this.parseStringAt(text, languageElement, languageElement, null);
     // console.log(container);
     return res;
   }
 
-  parseStringAt(text: string, languageElement: any, languageNode: any, container: BaseLanguageItem, index: number = 0): CompilerResult {
+  parseStringAt(text: string, languageElement: any, languageNode: any, container: BaseLanguageItem, index: number = 0): BaseLanguageItem {
 
     let group: AssertionsGroup;
-    // let nextItem: BaseLanguageItem;
     let globalResult;
 
     if (typeof languageElement === "string") {
       group = languageNode["assertions"].sub[languageElement];
-      globalResult = new CompilerResult(text, index);
+      globalResult = new BaseLanguageItem(text, index);
 
     } else {
       group = languageElement["assertions"];
 
-      // let globalCont = new languageElement();
-
-      // console.log(globalCont);
-      // item = group.assertions;
-      // console.log(item);
       globalResult = new languageElement(text, index);
       languageNode = languageElement;
     }
@@ -48,12 +41,12 @@ export class Compiler {
     }
 
     // on parcourt chacune des assertions du groupe. Si l'une des assertions est ok
-    // (elle retourne un tableau de CompilerResult non null, on continue, récursivement)
+    // (elle retourne un tableau de BaseLanguageItem non null, on continue, récursivement)
 
     if (group.type === AssertionsGroupType.AND) {
       // pour étre évalué comme vrai, toutes les assertions du groupes devront avoir une évaluation positive
       // le résultat sera alors un tableau des différents résultats (un par assertion)
-      let results: CompilerResult[] = [];
+      let results: BaseLanguageItem[] = [];
 
       for (let assertion of group.assertions) {
         let res = this.evaluateAssertion(text, assertion, languageNode, container, index);
@@ -65,17 +58,6 @@ export class Compiler {
 
           if (res.length > 0) {
             globalResult.addResults(assertion.id, res);
-
-            // console.log(typeof assertion.reference);
-            
-
-            if (assertion.reference && typeof assertion.reference !== "string") {
-              let item = new assertion.reference();
-              // container.assertionsMainResults[assertion.id] = [item];
-            } else {
-              //
-            }
-
           }
 
           globalResult.index = index;
@@ -128,9 +110,9 @@ export class Compiler {
     }
   }
 
-  evaluateAssertion(text: string, assertion: Assertion, languageNode: any, container: BaseLanguageItem, index: number = 0): CompilerResult[] {
+  evaluateAssertion(text: string, assertion: Assertion, languageNode: any, container: BaseLanguageItem, index: number = 0): BaseLanguageItem[] {
     // cas d'itération: * (0 et plus), + (1 et plus), ? (0 ou 1), et defaut (1)
-    let subRes: CompilerResult[] = [];
+    let subRes: BaseLanguageItem[] = [];
     let currentRes = this.evaluateAssertionIteration(text, assertion, languageNode, container, index);
 
     if (assertion.iterator === "?" || assertion.iterator === "*") {
@@ -173,7 +155,7 @@ export class Compiler {
     return subRes;
   }
 
-  evaluateAssertionIteration(text: string, assertion: Assertion, languageNode: any, container: BaseLanguageItem, index: number): CompilerResult {
+  evaluateAssertionIteration(text: string, assertion: Assertion, languageNode: any, container: BaseLanguageItem, index: number): BaseLanguageItem {
     let croppedText = text.substring(index);
 
     if (assertion.expression) {
@@ -194,25 +176,13 @@ export class Compiler {
       if (expRes) {
         let newIndex: number = index + expRes[0].length;
 
-        let res: CompilerResult;
+        let res: BaseLanguageItem;
 
         if (!assertion.reference || typeof assertion.reference === "string") {
-          res = new CompilerResult(text, newIndex);
+          res = new BaseLanguageItem(text, newIndex);
         } else {
           res = new assertion.reference(text, newIndex);
         }
-
-        // let res = new CompilerResult(text, newIndex);
-        // let sres = new languageNode();
-
-        // console.log(sres);
-        
-
-        // Il faut injecter le résultat dans un objet déjà instancié si il existe,
-        // Sinon le créer
-
-        // let node = new languageNode();
-        // console.log(node);
 
         if (assertion.groups) {
           for (let i = 1; i < expRes.length; i++) {

@@ -11,6 +11,4 @@ export class TgsBlockId extends BaseLanguageItem {
       }
     ]
   };
-
-  id: string;
 }

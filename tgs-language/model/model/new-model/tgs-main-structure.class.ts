@@ -13,5 +13,12 @@ export class TgsMainStructure extends BaseLanguageItem {
       }
     ]
   };
+
+  blocks: TgsGameBlock[];
+
+  fillObject() {
+    super.fillObject();
+    this.blocks = <TgsGameBlock[]>this.getResults("gameBlock") || []
+  }
   
 }

@@ -40,6 +40,7 @@ export class SequenceEditComponent implements OnInit {
 
   compileContent() {
     let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
+    res.fillObject();
     console.log(res);
   }
 
