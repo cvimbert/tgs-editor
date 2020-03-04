@@ -6,9 +6,7 @@ import { BaseLanguageItem } from './base-language-item.class';
 export class Compiler {
 
   parseTGSString(text: string, languageElement: any): BaseLanguageItem {
-    // let container = new languageElement();
     let res = this.parseStringAt(text, languageElement, languageElement, null);
-    // console.log(container);
     return res;
   }
 
