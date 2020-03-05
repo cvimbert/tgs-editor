@@ -1,6 +1,6 @@
 export class CompilerResult {
-  groups: {[key: string]: string};
-  results: {[key: string]: CompilerResult[]};
+  groups: { [key: string]: string };
+  results: { [key: string]: CompilerResult[] };
 
   startIndex: number;
 
