@@ -1,6 +1,8 @@
 import { AssertionsGroup, AssertionsGroupType, BaseLanguageItem } from 'tgs-compiler';
 import { TgsBlockId } from './tgs-block-id.class';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
+@JsonObject("TgsLinkItem")
 export class TgsLinkItem extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
@@ -64,5 +66,21 @@ export class TgsLinkItem extends BaseLanguageItem {
         ]
       },
     }
+  };
+
+  @JsonProperty("text", String, true)
+  text: string;
+
+  @JsonProperty("localLinkRef", String, true)
+  localLinkRef: string;
+
+  @JsonProperty("globalLinkRef", String, true)
+  globalLinkRef: string;
+
+  fillObject() {
+    super.fillObject();
+    this.text = this.getFirstValue("blockLink/simpleLinkText@text");
+    this.localLinkRef = this.getFirstValue("blockLink/link/ref@localRef");
+    this.globalLinkRef = this.getFirstValue("blockLink/link/ref@globalRef");
   }
 }

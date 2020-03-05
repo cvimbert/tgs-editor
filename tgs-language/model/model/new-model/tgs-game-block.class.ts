@@ -3,8 +3,9 @@ import { TgsBlockId } from './tgs-block-id.class';
 import { TgsComplexTextBlock } from './tgs-complex-text-block.class';
 import { TgsLinkItem } from './tgs-link-item.class';
 import { TgsGameBlockLine } from './tgs-game-block-line.class';
-import { link } from 'fs';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
+@JsonObject("TgsGameBlock")
 export class TgsGameBlock extends BaseLanguageItem {
 
   constructor() {
@@ -31,17 +32,20 @@ export class TgsGameBlock extends BaseLanguageItem {
     ]
   };
 
+  @JsonProperty("id", String, true)
   id: string;
+
+  @JsonProperty("lines", [TgsGameBlockLine], true)
   lines: TgsGameBlockLine[];
+
+  @JsonProperty("links", [TgsLinkItem], true)
   links: TgsLinkItem[];
 
   fillObject() {
     super.fillObject();
-    this.id = this.getFirstValue("blockId/blockId@id");
-    this.lines = <TgsGameBlockLine[]>this.results["blockLines"] || [];
-    this.links = <TgsLinkItem[]>this.results["linkItems"] || [];
-    console.log(this);
-
+    this.id = (<TgsBlockId>this.getFirstResult("blockId")).id;
+    this.lines = <TgsGameBlockLine[]>this.getResults("blockLine") || [];
+    this.links = <TgsLinkItem[]>this.getResults("linkItems") || [];
   }
 
 }

@@ -1,6 +1,8 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
 import { TgsGameBlockLine } from './tgs-game-block-line.class';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
+@JsonObject("TgsComplexTextBlock")
 export class TgsComplexTextBlock extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
@@ -12,4 +14,12 @@ export class TgsComplexTextBlock extends BaseLanguageItem {
       }
     ]
   };
+
+  @JsonProperty("line", [TgsGameBlockLine], true)
+  lines: TgsGameBlockLine[];
+
+  fillObject() {
+    super.fillObject();
+    this.lines = <TgsGameBlockLine[]>this.getResults("simpleLine");    
+  }
 }

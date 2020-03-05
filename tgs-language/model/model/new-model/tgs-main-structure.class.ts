@@ -1,6 +1,8 @@
 import { AssertionsGroup, AssertionsGroupType, BaseLanguageItem } from 'tgs-compiler';
 import { TgsGameBlock } from './tgs-game-block.class';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
+@JsonObject("TgsMainStructure")
 export class TgsMainStructure extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
@@ -14,6 +16,7 @@ export class TgsMainStructure extends BaseLanguageItem {
     ]
   };
 
+  @JsonProperty("blocks", [TgsGameBlock], true)
   blocks: TgsGameBlock[];
 
   fillObject() {

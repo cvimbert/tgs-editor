@@ -1,5 +1,7 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
+@JsonObject("TgsGameBlockLine")
 export class TgsGameBlockLine extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
@@ -28,4 +30,11 @@ export class TgsGameBlockLine extends BaseLanguageItem {
     }
   };
 
+  @JsonProperty("text", String, true)
+  text: string;
+
+  fillObject() {
+    super.fillObject();
+    this.text = this.getFirstValue("blockline/blockline@text");    
+  }
 }

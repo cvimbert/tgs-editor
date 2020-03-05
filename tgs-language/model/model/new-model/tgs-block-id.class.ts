@@ -1,5 +1,7 @@
 import { AssertionsGroup, BaseLanguageItem } from 'tgs-compiler';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
+@JsonObject("TgsBlockId")
 export class TgsBlockId extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
@@ -11,4 +13,12 @@ export class TgsBlockId extends BaseLanguageItem {
       }
     ]
   };
+
+  @JsonProperty("id", String, true)
+  id: string;
+  
+  fillObject() {
+    super.fillObject();
+    this.id = this.getFirstValue("blockId@id");    
+  }
 }
