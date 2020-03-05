@@ -5,6 +5,7 @@ import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
 import { MainStructure, TgsMainStructure } from 'tgs-model';
 import { SequenceService } from '../../services/sequence.service';
 import { TgsGameBlock } from 'tgs-model/model/new-model/tgs-game-block.class';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'sequence-edit',
@@ -18,7 +19,9 @@ export class SequenceEditComponent implements OnInit {
   private path = "projects/p1/index.tgs";
   private compiler = new Compiler();
 
-  private currentBlock: TgsGameBlock
+  private currentBlock: TgsGameBlock;
+  cursorPosition: Subject<number> = new Subject();
+
 
   @ViewChild("editor") editor: CodemirrorComponent;
 
@@ -30,6 +33,17 @@ export class SequenceEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadFile(this.path);
+
+    this.cursorPosition.subscribe(pos => {      
+
+      this.selectBlockByCursorPos(pos);
+
+      /* if (this.tgsService.rawContent !== "") {
+        this.refreshInspector();
+        this.selectBlockByCursorPos(pos);
+      } */
+      
+    });
   }
 
   loadFile(path: string) {
@@ -39,6 +53,8 @@ export class SequenceEditComponent implements OnInit {
 
       setTimeout(() => this.editor.codeMirror.getDoc().clearHistory());
 
+      this.selectBlockByCursorPos(0);
+
       this.compileContent();
     });
   }
@@ -46,6 +62,7 @@ export class SequenceEditComponent implements OnInit {
   compileContent() {
     let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
     res.fillObject();
+    this.sequenceModel = <TgsMainStructure>res;
     // console.log(res);
   }
 
@@ -70,6 +87,9 @@ export class SequenceEditComponent implements OnInit {
 
     let blockNum = 0;
 
+    console.log(index);
+    
+
     for (let block of this.sequenceModel.blocks) {
 
       let endIndex = blockNum < this.sequenceModel.blocks.length - 1 ? this.sequenceModel.blocks[blockNum + 1].startIndex : this.content.length;
@@ -77,8 +97,9 @@ export class SequenceEditComponent implements OnInit {
       if (index >= block.startIndex && index < endIndex) {
 
         if (block !== this.currentBlock) {
-          // TODO
-          // this.highlightSelectedBlockLines(block);
+          console.log(block);
+          
+          this.highlightSelectedBlockLines(block);
         }
         
         this.currentBlock = block;
@@ -90,4 +111,76 @@ export class SequenceEditComponent implements OnInit {
       blockNum++;
     }
   }
+
+  convertLineAndChToPosition(line: number, ch: number): number {
+
+    let count: number = 0;
+
+    for (let i: number = 0; i < line; i++) {
+      count += this.editor.codeMirror.getDoc().getLine(i).length + 1;
+    }
+
+    return count + ch;
+  }
+
+  onCursorActivity(evt: any) {
+    let pos: any = evt.getDoc().getCursor();
+    let charPos = this.convertLineAndChToPosition(pos.line, pos.ch);
+    this.selectBlockByCursorPos(charPos);
+
+    this.cursorPosition.next(charPos);
+
+    /* if (!this.initialized) {
+      this.editor.codeMirror.refresh();
+      this.initialized = true;
+    } */
+    
+  }
+
+  highlightSelectedBlockLines(block: TgsGameBlock): number[] {
+    let lines: number[] = [];
+
+    let startLine = this.getPosition(block.startIndex)["line"];
+
+    let blockIndex = this.sequenceModel.blocks.indexOf(block);
+
+    let endLine = (blockIndex >=  this.sequenceModel.blocks.length - 1) ? this.getPosition(block.endIndex)["line"] : (this.getPosition(this.sequenceModel.blocks[blockIndex + 1].startIndex))["line"] - 1;
+
+    let doc = this.editor.codeMirror.getDoc();
+
+    for (let i: number = 0; i < doc.lineCount(); i++) {
+      (doc as any).removeLineClass(i, "background", "selected");
+    }
+
+    for (let i: number = startLine; i <= endLine; i++) {
+      lines.push(i);
+      (doc as any).addLineClass(i, "background", "selected");
+    }
+
+    return lines;
+  }
+
+  getPosition(index: number): Object {
+    let count = 0;
+    let lineNum = 0;
+
+    let res: Object = {};
+
+    if (!this.editor.codeMirror) return;
+
+    this.editor.codeMirror.getDoc().eachLine(line => {
+      let newCount = count + line.text.length + 1;
+
+      if (index >= count && index < newCount) {
+        res = {
+          line: lineNum,
+          char: index - count
+        }
+      }
+      
+      count = newCount;
+      lineNum++;
+    });
+  }
+
 }
