@@ -181,6 +181,8 @@ export class SequenceEditComponent implements OnInit {
       count = newCount;
       lineNum++;
     });
+
+    return res;
   }
 
 }
