@@ -23,6 +23,11 @@ ngx-codemirror {
 
   .block-button {
     background-color: lightsalmon;
+    cursor: pointer;
+
+    &.selected {
+      background-color: salmon;
+    }
   }
 }
 

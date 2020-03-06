@@ -23,5 +23,9 @@ export class TgsMainStructure extends BaseLanguageItem {
     super.fillObject();
     this.blocks = <TgsGameBlock[]>this.getResults("gameBlock") || []
   }
+
+  getBlock(id: string): TgsGameBlock {
+    return this.blocks.find(block => block.id === id);
+  }
   
 }

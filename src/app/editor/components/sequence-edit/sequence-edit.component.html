@@ -12,11 +12,19 @@
     }
   }"
   (cursorActivity)="onCursorActivity($event)"
+  (onchange)="onContentUpdate()"
   ></ngx-codemirror>
   <div class="blocks-list">
-    <!-- <div *ngFor="let block of items" class="block-button">
-
-    </div> -->
+    <ng-container *ngIf="sequenceModel">
+      <div
+        *ngFor="let block of sequenceModel.blocks"
+        class="block-button"
+        (click)="selectBlock(block)"
+        [class.selected]="block === currentBlock"
+      >
+        #{{ block.id }}
+      </div>
+    </ng-container>
   </div>
   <div class="sequence-preview">
 

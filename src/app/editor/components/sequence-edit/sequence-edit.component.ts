@@ -18,6 +18,10 @@ export class SequenceEditComponent implements OnInit {
   sequenceModel: TgsMainStructure;
   private path = "projects/p1/index.tgs";
   private compiler = new Compiler();
+  navigationActivated = false;
+
+  selectedLink: HTMLElement;
+  listenLink = false;
 
   private currentBlock: TgsGameBlock;
   cursorPosition: Subject<number> = new Subject();
@@ -34,15 +38,14 @@ export class SequenceEditComponent implements OnInit {
   ngOnInit() {
     this.loadFile(this.path);
 
-    this.cursorPosition.subscribe(pos => {      
-
+    this.cursorPosition.subscribe(pos => {
       this.selectBlockByCursorPos(pos);
+    });
 
-      /* if (this.tgsService.rawContent !== "") {
-        this.refreshInspector();
-        this.selectBlockByCursorPos(pos);
-      } */
-      
+    setTimeout(() => {
+      this.editor.codeMirror.on("change", () => {
+        this.compileContent();
+      });
     });
   }
 
@@ -54,7 +57,6 @@ export class SequenceEditComponent implements OnInit {
       setTimeout(() => this.editor.codeMirror.getDoc().clearHistory());
 
       this.selectBlockByCursorPos(0);
-
       this.compileContent();
     });
   }
@@ -63,7 +65,6 @@ export class SequenceEditComponent implements OnInit {
     let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
     res.fillObject();
     this.sequenceModel = <TgsMainStructure>res;
-    // console.log(res);
   }
 
   saveFile(path: string) {
@@ -72,6 +73,11 @@ export class SequenceEditComponent implements OnInit {
 
   @HostListener("document:keydown", ["$event"])
   onKeyPressed(evt: KeyboardEvent) {
+    if (evt.key === "Control") {
+      this.navigationActivated = true;
+      this.checkLink();
+    }
+
     if (evt.ctrlKey) {
       switch (evt.key) {
         case "s":
@@ -81,14 +87,173 @@ export class SequenceEditComponent implements OnInit {
     }
   }
 
+  @HostListener('window:keyup', ['$event'])
+  onkeyUp(evt: KeyboardEvent) {
+    if (evt.key === "Control") {
+      this.navigationActivated = false;
+      this.uncheckLink();
+    }
+  }
+
+  @HostListener('click', ['$event'])
+  testLinkClick(evt: MouseEvent) {
+    if (this.selectedLink && this.navigationActivated) {
+      this.linkClick(evt);
+    }
+  }
+
+  @HostListener('mouseover', ['$event'])
+  rollOverLink(evt: MouseEvent) {
+    if (!this.navigationActivated) {
+      return;
+    }
+
+    let element = evt.target as HTMLElement;
+    if (element.classList.contains("cm-linkref") || element.classList.contains("cm-linkref-local")) {
+      this.selectedLink = element;
+      this.checkLink();
+    }
+  }
+
+  @HostListener('mouseout', ['$event'])
+  rollOutLink(evt: MouseEvent) {
+    if (!this.navigationActivated) {
+      return;
+    }
+
+    let element = evt.target as HTMLElement;
+    if (element.classList.contains("cm-linkref") || element.classList.contains("cm-linkref-local")) {
+      this.uncheckLink();
+      this.selectedLink = null;
+    }
+  }
+
+  checkLink() {    
+    if (this.selectedLink && this.navigationActivated && !this.listenLink) {
+      this.selectedLink.classList.add("cm-underline");
+      this.listenLink = true;
+    }
+  }
+
+  uncheckLink() {
+    if (this.listenLink) {
+      this.listenLink = false;
+      this.selectedLink.classList.remove("cm-underline");
+    }
+  }
+
+  linkClick(evt: MouseEvent) {
+    let element: HTMLElement = evt.target as HTMLElement;
+
+    let linkExp = /([A-Za-z0-9-\/]+)?(?:#([A-Za-z0-9-]+))?/;
+
+    let res = linkExp.exec(element.innerHTML);
+
+    let path = res[1];
+    let blockId = res[2];
+
+    // trois cas
+    if (blockId && !path) {
+      // lien local, on checke si le bloc existe
+
+      if (this.sequenceModel.getBlock(blockId)) {
+        // on y positionne le curseur
+        this.selectBlock(this.sequenceModel.getBlock(blockId));
+      } else {
+        // on crée un nouveau block (pour l'instant à la fin)
+        this.content += "\n\n#" + blockId + "\n\n\tTxt...\n";
+
+        // et on positionne le curseur à la fin de ce block
+        this.compileContent();
+
+        setTimeout(() => {
+          this.selectBlock(this.sequenceModel.getBlock(blockId));
+        });
+      }
+
+    } /* else if (!blockId && path) {
+      // lien externe sans blockId
+      this.router.navigate(["editor"], {
+        queryParams: {
+          path: path
+        }
+      });
+
+      this.save();
+
+    } else if (blockId && path) {
+      // lien externe et blockId
+      this.router.navigate(["editor"], {
+        queryParams: {
+          path: path,
+          block: blockId
+        }
+      });
+
+      this.save();
+    } */
+  }
+
+  /* refreshInspector() {
+    if (this.content && this.content !== "") {
+      let parser: TGSParser = new TGSParser();
+      let result: ParsingResult = parser.parseTGSString(this.content);
+      this.mainModel = MainStructure.loadFromParsingResult(result);
+    }
+  } */
+
+  selectBlock(model: TgsGameBlock) {
+    this.editor.codeMirror.focus();
+
+    this.highlightSelectedBlockLines(model);
+    
+    this.currentBlock = model;
+   
+    this.setCursorPos(model.startIndex);
+    this.setBlockScroll(model);
+  }
+
+  setBlockScroll(block: TgsGameBlock) {
+    let startLine: number = this.getPosition(block.startIndex)["line"];
+    let endLine: number = this.getPosition(block.endIndex)["line"] + 1;
+
+    this.editor.codeMirror.scrollIntoView({
+      from: {
+        line: startLine,
+        ch: 0
+      },
+      to: {
+        line: endLine,
+        ch: 0
+      },
+    }, 100);
+  }
+
+  setCursorPos(index: number) {
+    let count = 0;
+    let lineNum = 0;
+
+    if (!this.editor.codeMirror) return;
+
+    this.editor.codeMirror.getDoc().eachLine(line => {
+      let newCount = count + line.text.length + 1;
+
+      if (index >= count && index < newCount) {
+        this.editor.codeMirror.getDoc().setCursor(lineNum, index - count, {
+          scroll: true
+        });
+      }
+      
+      count = newCount;
+      lineNum++;
+    });
+  }
+
   selectBlockByCursorPos(index: number) {
 
     if (!this.sequenceModel) return;
 
-    let blockNum = 0;
-
-    console.log(index);
-    
+    let blockNum = 0;    
 
     for (let block of this.sequenceModel.blocks) {
 
@@ -96,9 +261,7 @@ export class SequenceEditComponent implements OnInit {
 
       if (index >= block.startIndex && index < endIndex) {
 
-        if (block !== this.currentBlock) {
-          console.log(block);
-          
+        if (block !== this.currentBlock) {          
           this.highlightSelectedBlockLines(block);
         }
         
@@ -134,6 +297,11 @@ export class SequenceEditComponent implements OnInit {
       this.editor.codeMirror.refresh();
       this.initialized = true;
     } */
+    
+  }
+
+  onContentUpdate() {
+    console.log("update");
     
   }
 
