@@ -31,7 +31,7 @@ export class TgsGameBlockLine extends BaseLanguageItem {
   };
 
   @JsonProperty("text", String, true)
-  text: string;
+  text = "";
 
   fillObject() {
     super.fillObject();

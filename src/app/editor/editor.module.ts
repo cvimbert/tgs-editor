@@ -10,11 +10,15 @@ import 'codemirror/addon/hint/show-hint';
 import './anyword-hint';
 import { FilesManagerService } from './services/files-manager.service';
 import { NgxElectronModule } from 'ngx-electron';
+import { PreviewDisplayComponent } from './components/preview-display/preview-display.component';
+import { SequenceStepDisplayComponent } from './components/sequence-step-display/sequence-step-display.component';
 
 @NgModule({
   declarations: [
     EditorComponent,
-    SequenceEditComponent
+    SequenceEditComponent,
+    PreviewDisplayComponent,
+    SequenceStepDisplayComponent
   ],
   providers: [
     FilesManagerService

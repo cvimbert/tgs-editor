@@ -15,7 +15,6 @@ import { Subject } from 'rxjs';
 export class SequenceEditComponent implements OnInit {
 
   content = "";
-  sequenceModel: TgsMainStructure;
   private path = "projects/p1/index.tgs";
   private compiler = new Compiler();
   navigationActivated = false;
@@ -64,11 +63,19 @@ export class SequenceEditComponent implements OnInit {
   compileContent() {
     let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
     res.fillObject();
-    this.sequenceModel = <TgsMainStructure>res;
+    this.sequenceService.currentSequence = <TgsMainStructure>res;
   }
 
   saveFile(path: string) {
     this.filesManager.saveToExistingFile(path, this.content).then(() => console.log("File saved."));
+  }
+
+  get sequenceModel(): TgsMainStructure {
+    return this.sequenceService.currentSequence;
+  }
+
+  set sequenceModel(value: TgsMainStructure) {
+    this.sequenceService.currentSequence = value;
   }
 
   @HostListener("document:keydown", ["$event"])
@@ -160,7 +167,7 @@ export class SequenceEditComponent implements OnInit {
         // on y positionne le curseur
         this.selectBlock(this.sequenceModel.getBlock(blockId));
       } else {
-        // on crée un nouveau block (pour l'instant à la fin)
+        // on crée un nouveau bloc (pour l'instant à la fin)
         this.content += "\n\n#" + blockId + "\n\n\tTxt...\n";
 
         // et on positionne le curseur à la fin de ce block
@@ -336,6 +343,7 @@ export class SequenceEditComponent implements OnInit {
 
     if (!this.editor.codeMirror) return;
 
+    // Vérifier les index des lignes, le pb de décalage vient peut-être de là
     this.editor.codeMirror.getDoc().eachLine(line => {
       let newCount = count + line.text.length + 1;
 

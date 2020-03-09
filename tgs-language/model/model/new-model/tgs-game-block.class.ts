@@ -33,13 +33,13 @@ export class TgsGameBlock extends BaseLanguageItem {
   };
 
   @JsonProperty("id", String, true)
-  id: string;
+  id = "";
 
   @JsonProperty("lines", [TgsGameBlockLine], true)
-  lines: TgsGameBlockLine[];
+  lines: TgsGameBlockLine[] = [];
 
   @JsonProperty("links", [TgsLinkItem], true)
-  links: TgsLinkItem[];
+  links: TgsLinkItem[] = [];
 
   fillObject() {
     super.fillObject();

@@ -17,7 +17,7 @@ export class TgsMainStructure extends BaseLanguageItem {
   };
 
   @JsonProperty("blocks", [TgsGameBlock], true)
-  blocks: TgsGameBlock[];
+  blocks: TgsGameBlock[] = [];
 
   fillObject() {
     super.fillObject();

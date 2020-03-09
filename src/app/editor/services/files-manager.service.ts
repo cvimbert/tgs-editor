@@ -14,6 +14,11 @@ export class FilesManagerService {
     this.fs = electronService.remote.require("fs");
   }
 
+  // TODO
+  normalizeLineBreaks() {
+
+  }
+
   loadFile(path: string): Promise<string> {
     return new Promise((resolve: (value: string) => void, reject: (err: Error) => void) => {
       this.fs.readFile(path, "utf8", (err: Error, data: string) => {
