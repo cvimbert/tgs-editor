@@ -31,7 +31,7 @@ export class FilesManagerService {
     });
   }
 
-  saveToExistingFile(path: string, content: string): Promise<void> {
+  saveToFile(path: string, content: string): Promise<void> {
     return new Promise((resolve: () => void, reject: (err: Error) => void) => {
       this.fs.writeFile(path, content, (err: Error) => {
         if (err) {

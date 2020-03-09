@@ -16,6 +16,7 @@ export class SequenceEditComponent implements OnInit {
 
   content = "";
   private path = "projects/p1/index.tgs";
+  private threadPath = "projects/p1/index-thread.json";
   private compiler = new Compiler();
   navigationActivated = false;
 
@@ -36,6 +37,7 @@ export class SequenceEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadFile(this.path);
+    this.sequenceService.loadThread(this.threadPath);
 
     this.cursorPosition.subscribe(pos => {
       this.selectBlockByCursorPos(pos);
@@ -67,7 +69,8 @@ export class SequenceEditComponent implements OnInit {
   }
 
   saveFile(path: string) {
-    this.filesManager.saveToExistingFile(path, this.content).then(() => console.log("File saved."));
+    this.filesManager.saveToFile(path, this.content).then(() => console.log("File saved."));
+    this.sequenceService.saveThread();
   }
 
   get sequenceModel(): TgsMainStructure {
