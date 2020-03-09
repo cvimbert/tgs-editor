@@ -53,7 +53,7 @@ export class SequenceEditComponent implements OnInit {
   loadFile(path: string) {
     this.content = "";
     this.filesManager.loadFile(path).then(content => {
-      this.content = content;
+      this.content = content.replace(/(?:\r\n|\r|\n)/g, '\n');
 
       setTimeout(() => this.editor.codeMirror.getDoc().clearHistory());
 
