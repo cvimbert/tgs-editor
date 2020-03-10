@@ -22,4 +22,8 @@ export class TgsComplexTextBlock extends BaseLanguageItem {
     super.fillObject();
     this.lines = <TgsGameBlockLine[]>this.getResults("simpleLine");    
   }
+
+  get texts(): string[] {
+    return this.lines.map(line => line.text);
+  }
 }

@@ -27,5 +27,9 @@ export class TgsMainStructure extends BaseLanguageItem {
   getBlock(id: string): TgsGameBlock {
     return this.blocks.find(block => block.id === id);
   }
+
+  get firstBlock(): TgsGameBlock {
+    return this.blocks.length > 0 ? this.blocks[0] : null;
+  }
   
 }

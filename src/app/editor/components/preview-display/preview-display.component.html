@@ -1,1 +1,5 @@
-
+<preview-display-block
+  *ngFor="let entry of sequenceService.currentThread.steps"
+  [threadStep]="entry"
+></preview-display-block>
+<preview-display-block></preview-display-block>

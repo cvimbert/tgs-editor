@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SequenceService } from '../../services/sequence.service';
+import { TgsMainStructure } from 'tgs-model';
 
 @Component({
   selector: 'preview-display',
@@ -13,6 +14,10 @@ export class PreviewDisplayComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  get currentSequence(): TgsMainStructure {
+    return this.sequenceService.currentSequence;
   }
 
 }

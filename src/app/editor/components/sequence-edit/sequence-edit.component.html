@@ -27,7 +27,7 @@
     </ng-container>
   </div>
   <div class="sequence-preview">
-    <preview-display></preview-display>
+    <preview-display *ngIf="sequenceModel && sequenceService.currentThread"></preview-display>
   </div>
 </div>
 

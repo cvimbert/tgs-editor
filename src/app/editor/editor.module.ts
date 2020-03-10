@@ -12,13 +12,15 @@ import { FilesManagerService } from './services/files-manager.service';
 import { NgxElectronModule } from 'ngx-electron';
 import { PreviewDisplayComponent } from './components/preview-display/preview-display.component';
 import { SequenceStepDisplayComponent } from './components/sequence-step-display/sequence-step-display.component';
+import { PreviewDisplayBlockComponent } from './components/preview-display-block/preview-display-block.component';
 
 @NgModule({
   declarations: [
     EditorComponent,
     SequenceEditComponent,
     PreviewDisplayComponent,
-    SequenceStepDisplayComponent
+    SequenceStepDisplayComponent,
+    PreviewDisplayBlockComponent
   ],
   providers: [
     FilesManagerService

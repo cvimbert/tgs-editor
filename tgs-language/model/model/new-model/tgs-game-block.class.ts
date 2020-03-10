@@ -35,8 +35,8 @@ export class TgsGameBlock extends BaseLanguageItem {
   @JsonProperty("id", String, true)
   id = "";
 
-  @JsonProperty("lines", [TgsGameBlockLine], true)
-  lines: TgsGameBlockLine[] = [];
+  @JsonProperty("lines", [TgsComplexTextBlock], true)
+  complexBlocks: TgsComplexTextBlock[] = [];
 
   @JsonProperty("links", [TgsLinkItem], true)
   links: TgsLinkItem[] = [];
@@ -44,8 +44,14 @@ export class TgsGameBlock extends BaseLanguageItem {
   fillObject() {
     super.fillObject();
     this.id = (<TgsBlockId>this.getFirstResult("blockId")).id;
-    this.lines = <TgsGameBlockLine[]>this.getResults("blockLine") || [];
+    this.complexBlocks = <TgsComplexTextBlock[]>this.getResults("blockLines") || [];
     this.links = <TgsLinkItem[]>this.getResults("linkItems") || [];
+  }
+  
+  get linesText(): string[] {
+    let texts: string[] = [];
+    this.complexBlocks.forEach(line => texts.push(...line.texts));
+    return texts;
   }
 
 }
