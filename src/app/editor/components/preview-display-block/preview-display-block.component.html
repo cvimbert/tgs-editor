@@ -1,1 +1,11 @@
-<span *ngFor="let text of block.linesText">{{ text }}</span>
+<div class="container" *ngIf="block">
+  <div *ngFor="let text of block.linesText">{{ text }}</div>
+</div>
+<div class="links">
+  <ng-container *ngIf="block && block.links">
+    <div class="link-display"
+    *ngFor="let link of block.links"
+    (click)="selectLink(link)"
+  >{{ link.text }}</div>
+  </ng-container>
+</div>

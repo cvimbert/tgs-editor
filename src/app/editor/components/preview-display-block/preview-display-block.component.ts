@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SequenceThreadStep } from 'src/app/sequence-thread/sequence-thread-step.class';
 import { TgsGameBlock } from 'tgs-model/model/new-model/tgs-game-block.class';
 import { SequenceService } from '../../services/sequence.service';
+import { TgsLinkItem } from 'tgs-model/model/new-model/tgs-link-item.class';
 
 @Component({
   selector: 'preview-display-block',
@@ -11,21 +12,20 @@ import { SequenceService } from '../../services/sequence.service';
 export class PreviewDisplayBlockComponent implements OnInit {
 
   @Input() threadStep: SequenceThreadStep;
+  @Input() index: number;
   block: TgsGameBlock;
 
   constructor(
     public sequenceService: SequenceService
   ) { }
 
-  ngOnInit() {
-    if (this.threadStep) {
-      this.block = this.sequenceService.currentSequence.getBlock(this.threadStep.blockId);
-    } else {
-      this.block = this.sequenceService.currentSequence.firstBlock;
-    }
-
-    console.log(this.block);
-    
+  ngOnInit() {    
+    this.block = this.sequenceService.currentSequence.getBlock(this.threadStep.blockId);
   }
 
+  selectLink(link: TgsLinkItem) {
+    this.sequenceService.currentThread.steps.push({
+      blockId: link.localLinkRef
+    });
+  }
 }
