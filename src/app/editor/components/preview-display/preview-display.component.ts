@@ -15,14 +15,7 @@ export class PreviewDisplayComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.sequenceService.currentThread.steps.length === 0) {
-      this.sequenceService.currentThread.steps.push({
-        blockId: this.sequenceService.currentSequence.firstBlock.id
-      });
-
-      console.log("yes");
-      
-    }
+    
   }
 
   get currentSequence(): TgsMainStructure {
@@ -30,15 +23,11 @@ export class PreviewDisplayComponent implements OnInit {
   }
 
   get steps(): SequenceThreadStep[] {
-    if (this.sequenceService.currentThread.steps.length > 0) {
-      return this.sequenceService.currentThread.steps;
-    } else {
-      return [
-        {
-          blockId: this.sequenceService.currentSequence.firstBlock.id
-        }
-      ];
+    if (this.sequenceService.currentThread.steps.length === 0) {
+      this.sequenceService.currentThread.push(this.sequenceService.currentSequence.firstBlock.id);      
     }
+    
+    return this.sequenceService.currentThread.steps;
   }
 
 }

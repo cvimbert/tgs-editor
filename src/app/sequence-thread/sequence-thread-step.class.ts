@@ -4,5 +4,5 @@ import { JsonObject, JsonProperty } from 'json2typescript';
 export class SequenceThreadStep {
 
   @JsonProperty("blockId", String, true)
-  blockId: string;
+  blockId = "";
 }

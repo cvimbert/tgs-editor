@@ -6,4 +6,14 @@ export class SequenceThread {
 
   @JsonProperty("steps", [SequenceThreadStep], true)
   steps: SequenceThreadStep[] = [];
+
+  push(id: string) {
+    let newStep = new SequenceThreadStep();
+    newStep.blockId = id;
+    this.steps.push(newStep);
+  }
+
+  reset() {
+    this.steps = [];
+  }
 }

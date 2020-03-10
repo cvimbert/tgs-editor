@@ -24,8 +24,10 @@ export class PreviewDisplayBlockComponent implements OnInit {
   }
 
   selectLink(link: TgsLinkItem) {
-    this.sequenceService.currentThread.steps.push({
-      blockId: link.localLinkRef
-    });
+    this.sequenceService.currentThread.push(link.localLinkRef);
+  }
+
+  get isLast(): boolean {
+    return this.index == this.sequenceService.currentThread.steps.length - 1;
   }
 }

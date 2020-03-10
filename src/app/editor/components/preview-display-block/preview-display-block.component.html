@@ -2,7 +2,7 @@
   <div *ngFor="let text of block.linesText">{{ text }}</div>
 </div>
 <div class="links">
-  <ng-container *ngIf="block && block.links">
+  <ng-container *ngIf="block && block.links && isLast">
     <div class="link-display"
     *ngFor="let link of block.links"
     (click)="selectLink(link)"
