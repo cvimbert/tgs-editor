@@ -6,6 +6,7 @@ import { MainStructure, TgsMainStructure } from 'tgs-model';
 import { SequenceService } from '../../services/sequence.service';
 import { TgsGameBlock } from 'tgs-model/model/new-model/tgs-game-block.class';
 import { Subject } from 'rxjs';
+import { PreviewDisplayComponent } from '../preview-display/preview-display.component';
 
 @Component({
   selector: 'sequence-edit',
@@ -26,7 +27,7 @@ export class SequenceEditComponent implements OnInit {
   private currentBlock: TgsGameBlock;
   cursorPosition: Subject<number> = new Subject();
 
-
+  @ViewChild("preview") previewDisplay: PreviewDisplayComponent;
   @ViewChild("editor") editor: CodemirrorComponent;
 
 
@@ -66,6 +67,7 @@ export class SequenceEditComponent implements OnInit {
     let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
     res.fillObject();
     this.sequenceService.currentSequence = <TgsMainStructure>res;
+    this.previewDisplay.update();
   }
 
   resetThread() {
@@ -311,11 +313,6 @@ export class SequenceEditComponent implements OnInit {
       this.editor.codeMirror.refresh();
       this.initialized = true;
     } */
-    
-  }
-
-  onContentUpdate() {
-    console.log("update");
     
   }
 
