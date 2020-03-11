@@ -1,7 +1,7 @@
 <div class="container">
   <preview-display-block
-  *ngFor="let entry of sequenceService.currentThread.steps; let i = index"
+  #block
+  *ngFor="let entry of steps"
   [threadStep]="entry"
-  [index]="i"
   ></preview-display-block>
 </div>

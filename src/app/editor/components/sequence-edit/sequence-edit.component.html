@@ -27,6 +27,9 @@
     </ng-container>
   </div>
   <div class="sequence-preview">
+    <div class="actions">
+      <div class="action-button" (click)="resetThread()">R</div>
+    </div>
     <preview-display *ngIf="sequenceModel && sequenceService.currentThread"></preview-display>
   </div>
 </div>

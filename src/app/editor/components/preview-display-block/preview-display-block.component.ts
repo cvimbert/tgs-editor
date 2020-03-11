@@ -12,14 +12,22 @@ import { TgsLinkItem } from 'tgs-model/model/new-model/tgs-link-item.class';
 export class PreviewDisplayBlockComponent implements OnInit {
 
   @Input() threadStep: SequenceThreadStep;
-  @Input() index: number;
   block: TgsGameBlock;
 
   constructor(
     public sequenceService: SequenceService
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {  
+    this.update();  
+  }
+
+  // Pas bon
+  /* get block(): TgsGameBlock {
+    return this.sequenceService.currentSequence.getBlock(this.threadStep.blockId);
+  } */
+  
+  update() {
     this.block = this.sequenceService.currentSequence.getBlock(this.threadStep.blockId);
   }
 
@@ -28,6 +36,7 @@ export class PreviewDisplayBlockComponent implements OnInit {
   }
 
   get isLast(): boolean {
-    return this.index == this.sequenceService.currentThread.steps.length - 1;
+    let stps = this.sequenceService.currentThread.steps;
+    return this.threadStep == stps[stps.length - 1];
   }
 }

@@ -20,20 +20,46 @@ ngx-codemirror {
 .blocks-list {
   width: 200px;
   background-color: lightskyblue;
+  border-left: 1px solid lightgray;
+  background-color: #344147;
 
   .block-button {
-    background-color: lightsalmon;
     cursor: pointer;
+    color: white;
+    padding: 3px;
 
     &.selected {
-      background-color: salmon;
+      background-color: #50626b;
     }
   }
 }
 
 .sequence-preview {
   width: 400px;
-  background-color: lightgreen;
+  background-color: #344147;
+  color: white;
+  border-left: 1px solid lightgray;
+
+  display: flex;
+  flex-direction: column;
+
+  .actions {
+    border-bottom: 1px solid;
+
+    .action-button {
+      width: 40px;
+      height: 40px;
+      border-right: 1px solid;
+      text-align: center;
+      line-height: 38px;
+      font-size: 25px;
+      cursor: pointer;
+    }
+  }
+
+  preview-display {
+    flex: 1;
+  }
 }
 
 .container {

@@ -44,7 +44,7 @@ export class SequenceEditComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.editor.codeMirror.on("change", () => {
+      this.editor.codeMirror.on("change", () => {        
         this.compileContent();
       });
     });
@@ -66,6 +66,10 @@ export class SequenceEditComponent implements OnInit {
     let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
     res.fillObject();
     this.sequenceService.currentSequence = <TgsMainStructure>res;
+  }
+
+  resetThread() {
+    this.sequenceService.currentThread.reset();
   }
 
   saveFile(path: string) {
