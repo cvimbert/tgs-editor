@@ -16,4 +16,8 @@ export class SequenceThread {
   reset() {
     this.steps = [];
   }
+
+  goBack() {
+    this.steps.pop();
+  }
 }

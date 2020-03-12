@@ -1,26 +1,25 @@
 #first
-  Yes yes yes ffffffsdfsd
-  sqdqsdqs uuu fdfsdf
-  
-  jsdsd
-  
+	
+    Texte first block
+    
   * Vers le second -> #second
   * Vers b1 -> #b1
+  
 
 #second
-  Re-yes encore
-  Avec une typo lisible et agréable, qui ne fasse pas trop "code".
+
+	{}
+
+    Re-yes {} encore
+    Avec une typo lisible et agréable, qui ne fasse pas trop "code".
   
-  * branche1 -> #b1
-  * branche2 -> #b2
+    * branche1 -> #b1
+    * branche2 -> #b2
     
 
 #b1
 
 	Texte b1
-    
-    sqdqs
-    dsqdsqdqs
     
     * réinit -> #first
 

@@ -1,5 +1,8 @@
+:host {
+  overflow: auto;
+}
+
 .container {
   padding: 8px;
-  overflow: auto;
   height: 100%;
 }

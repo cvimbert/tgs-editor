@@ -1,5 +1,6 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { TgsTemplateExpression } from './tgs-template-expression.class';
 
 @JsonObject("TgsGameBlockLine")
 export class TgsGameBlockLine extends BaseLanguageItem {
@@ -18,12 +19,16 @@ export class TgsGameBlockLine extends BaseLanguageItem {
     ],
     sub: {
       blockLine2: {
-        type: AssertionsGroupType.AND,
+        type: AssertionsGroupType.OR,
         assertions: [
           {
             id: "blockline",
-            expression: /(?!#|\s*\*|\s*\]|\s*\>|\s*\r\n)(.*?)(?=[\n\r\[\]\<\>])/,
+            expression: /(?!#|\s*\*|\s*\]|\s*\>|\s*\r\n|\s*\{)(.*?)(?=[\n\r\[\]\<\>])/,
             groups: ["text"]
+          },
+          {
+            id: "template",
+            reference: TgsTemplateExpression
           }
         ]
       }

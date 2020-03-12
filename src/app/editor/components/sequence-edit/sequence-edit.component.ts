@@ -67,11 +67,18 @@ export class SequenceEditComponent implements OnInit {
     let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
     res.fillObject();
     this.sequenceService.currentSequence = <TgsMainStructure>res;
-    this.previewDisplay.update();
+
+    if (this.previewDisplay) {
+      this.previewDisplay.update();
+    }
   }
 
   resetThread() {
     this.sequenceService.currentThread.reset();
+  }
+
+  threadBack() {
+    this.sequenceService.currentThread.goBack();
   }
 
   saveFile(path: string) {
@@ -98,6 +105,10 @@ export class SequenceEditComponent implements OnInit {
       switch (evt.key) {
         case "s":
           this.saveFile(this.path);
+          break;
+
+        case "b":
+          this.threadBack();
           break;
       }
     }
