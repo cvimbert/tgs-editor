@@ -8,9 +8,7 @@
 
 #second
 
-	{}
-
-    Re-yes {} encore
+    Re-yes { #b1 } encore
     Avec une typo lisible et agréable, qui ne fasse pas trop "code".
   
     * branche1 -> #b1

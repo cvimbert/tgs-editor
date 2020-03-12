@@ -19,6 +19,10 @@ export class TgsGameBlock extends BaseLanguageItem {
         id: "blockId",
         reference: TgsBlockId
       },
+      // {
+      //   id: "open",
+      //   expression: /\[/
+      // },
       {
         id: "blockLines",
         reference: TgsComplexTextBlock,

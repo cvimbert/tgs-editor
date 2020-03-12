@@ -10,7 +10,7 @@ export class TgsGameBlockLine extends BaseLanguageItem {
     assertions: [
       {
         id: "doubleBreak",
-        expression: /[\r|\n|\n\r](?:[^\n]\s*?)[\r|\n|\n\r]/
+        expression: /\n\n/
       },
       {
         id: "blockline",
@@ -23,7 +23,7 @@ export class TgsGameBlockLine extends BaseLanguageItem {
         assertions: [
           {
             id: "blockline",
-            expression: /(?!#|\s*\*|\s*\]|\s*\>|\s*\r\n|\s*\{)(.*?)(?=[\n\r\[\]\<\>])/,
+            expression: /(?!#|\s*\{|\s*\*|\s*\]|\s*\>|\s*\r\n)(.*?)(?=[\n\r\[\]\<\>\{])/,
             groups: ["text"]
           },
           {
