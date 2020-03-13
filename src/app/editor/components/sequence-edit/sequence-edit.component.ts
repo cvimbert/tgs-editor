@@ -65,7 +65,7 @@ export class SequenceEditComponent implements OnInit {
 
   compileContent() {
     let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
-    res.fillObject();
+    res.fillObject(res);
     this.sequenceService.currentSequence = <TgsMainStructure>res;
 
     if (this.previewDisplay) {

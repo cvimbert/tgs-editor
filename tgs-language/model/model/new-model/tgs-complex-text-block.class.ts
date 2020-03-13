@@ -18,12 +18,13 @@ export class TgsComplexTextBlock extends BaseLanguageItem {
   @JsonProperty("line", [TgsGameBlockLine], true)
   lines: TgsGameBlockLine[] = [];
 
-  fillObject() {
-    super.fillObject();
+  constructObject() {
     this.lines = <TgsGameBlockLine[]>this.getResults("simpleLine");    
   }
 
   get texts(): string[] {
-    return this.lines.map(line => line.text);
+    let texts: string[] = [];
+    this.lines.forEach(line => texts.push(...line.texts));
+    return texts;
   }
 }

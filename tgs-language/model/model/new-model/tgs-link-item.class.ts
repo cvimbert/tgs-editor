@@ -77,8 +77,7 @@ export class TgsLinkItem extends BaseLanguageItem {
   @JsonProperty("globalLinkRef", String, true)
   globalLinkRef = "";
 
-  fillObject() {
-    super.fillObject();
+  constructObject() {
     this.text = this.getFirstValue("blockLink/simpleLinkText@text");
     this.localLinkRef = this.getFirstValue("blockLink/link/ref@localRef");
     this.globalLinkRef = this.getFirstValue("blockLink/link/ref@globalRef");

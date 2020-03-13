@@ -45,8 +45,7 @@ export class TgsGameBlock extends BaseLanguageItem {
   @JsonProperty("links", [TgsLinkItem], true)
   links: TgsLinkItem[] = [];
 
-  fillObject() {
-    super.fillObject();
+  constructObject() {
     this.id = (<TgsBlockId>this.getFirstResult("blockId")).id;
     this.complexBlocks = <TgsComplexTextBlock[]>this.getResults("blockLines") || [];
     this.links = <TgsLinkItem[]>this.getResults("linkItems") || [];

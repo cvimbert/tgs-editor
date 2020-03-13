@@ -35,11 +35,22 @@ export class TgsGameBlockLine extends BaseLanguageItem {
     }
   };
 
-  @JsonProperty("text", String, true)
-  text = "";
+  @JsonProperty("directText", String, true)
+  directText = "";
 
-  fillObject() {
-    super.fillObject();
-    this.text = this.getFirstValue("blockline/blockline@text");    
+  @JsonProperty("template", TgsTemplateExpression, true)
+  template: TgsTemplateExpression = null;
+
+  constructObject() {
+    this.directText = this.getFirstValue("blockline/blockline@text");
+    this.template = <TgsTemplateExpression>this.getFirstResult("blockline/template");
+  }
+
+  get texts(): string[] {
+    if (this.directText != undefined) {
+      return [this.directText];
+    } else if (this.template) {
+      return this.template.texts;
+    }
   }
 }

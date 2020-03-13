@@ -17,8 +17,7 @@ export class TgsBlockId extends BaseLanguageItem {
   @JsonProperty("id", String, true)
   id = "";
   
-  fillObject() {
-    super.fillObject();
-    this.id = this.getFirstValue("blockId@id");    
+  constructObject() {
+    this.id = this.getFirstValue("blockId@id");
   }
 }
