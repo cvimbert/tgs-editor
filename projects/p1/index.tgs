@@ -1,3 +1,8 @@
+@headers {
+	name: "Séquence de test 1";
+    extends: dqsdqs/sdqs/hhhh.iii;
+}
+
 #first
 	
     Texte first block

@@ -1,13 +1,19 @@
 import { AssertionsGroup, AssertionsGroupType, BaseLanguageItem } from 'tgs-compiler';
 import { TgsGameBlock } from './tgs-game-block.class';
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { TgsHeaders } from './tgs-headers.class';
 
 @JsonObject("TgsMainStructure")
 export class TgsMainStructure extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
-    type: AssertionsGroupType.OR,
+    type: AssertionsGroupType.AND,
     assertions: [
+      {
+        id: "headers",
+        reference: TgsHeaders,
+        iterator: "?"
+      },
       {
         id: "gameBlock",
         reference: TgsGameBlock,
@@ -19,8 +25,11 @@ export class TgsMainStructure extends BaseLanguageItem {
   @JsonProperty("blocks", [TgsGameBlock], true)
   blocks: TgsGameBlock[] = [];
 
+  headers: TgsHeaders;
+
   constructObject() {
     this.blocks = <TgsGameBlock[]>this.getResults("gameBlock") || [];
+    this.headers = <TgsHeaders>this.getFirstResult("headers");
   }
 
   getBlock(id: string): TgsGameBlock {
