@@ -1,0 +1,7 @@
+<span *ngIf="!line.isBreak && line.directText">{{ line.directText }}&nbsp;</span>
+<div *ngIf="line.isBreak" class="line-separator"></div>
+<ng-container *ngIf="line.template && line.template.referencedBlock">
+  <ng-container *ngFor="let cblock of line.template.referencedBlock.complexBlocks">
+    <preview-line-display *ngFor="let sline of cblock.lines" [line]="sline"></preview-line-display>
+  </ng-container>
+</ng-container>

@@ -24,12 +24,10 @@ export class SequenceService {
   );
 
   constructor(
-    private filesManager: FilesManagerService,
+    public filesManager: FilesManagerService,
     electronService: ElectronService
   ) {
     this.manager = new TgsManager(electronService.remote.require("fs"));
-
-    this.manager.loadTgsFile("projects/p1/index").then(struct => console.log(struct)).catch(e => console.log(e));
   }
 
   loadThread(path: string) {

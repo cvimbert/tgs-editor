@@ -10,7 +10,7 @@ export class TgsGameBlockLine extends BaseLanguageItem {
     assertions: [
       {
         id: "doubleBreak",
-        expression: /\n\n/
+        expression: /-{4,}/
       },
       {
         id: "blockline",
@@ -22,7 +22,7 @@ export class TgsGameBlockLine extends BaseLanguageItem {
         type: AssertionsGroupType.OR,
         assertions: [
           {
-            id: "blockline",
+            id: "blocklineB",
             expression: /(?!#|\s*\{|\s*\*|\s*\]|\s*\>|\s*\r\n)(.*?)(?=[\n\r\[\]\<\>\{])/,
             groups: ["text"]
           },
@@ -35,6 +35,8 @@ export class TgsGameBlockLine extends BaseLanguageItem {
     }
   };
 
+  isBreak = false;
+
   @JsonProperty("directText", String, true)
   directText = "";
 
@@ -42,8 +44,10 @@ export class TgsGameBlockLine extends BaseLanguageItem {
   template: TgsTemplateExpression = null;
 
   constructObject() {
-    this.directText = this.getFirstValue("blockline/blockline@text");
+    this.directText = this.getFirstValue("blockline/blocklineB@text");
     this.template = <TgsTemplateExpression>this.getFirstResult("blockline/template");
+
+    this.isBreak = this.getFirstKey() === "doubleBreak";
   }
 
   get texts(): string[] {

@@ -5,15 +5,28 @@
 
 #first
 	
-    Texte first block
+    Texte first block dddddsssddd
+    dddddddd
+    fdsfsdfsd et voilà un autre mot !
+    --------
+    { #firstone }
+    --------
+    Et voilà !!!!
     
   * Vers le second -> #second
   * Vers b1 -> #b1
+  * Vers f1 -> #firstone
+  * dqsdqsdq -> #dest
   
 
 #second
 
-    Re-yes { #b1 } encore
+    Re-yes
+    ----
+    { #firsttwo }
+    ----
+    encore
+    
     Avec une typo lisible et agréable, qui ne fasse pas trop "code".
   
     * branche1 -> #b1
@@ -32,3 +45,8 @@
 	Texte b2
     
     * réinit -> #first
+
+
+#dest
+
+	Txt...

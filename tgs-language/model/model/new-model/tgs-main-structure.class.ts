@@ -34,7 +34,25 @@ export class TgsMainStructure extends BaseLanguageItem {
   }
 
   getBlock(id: string): TgsGameBlock {
-    return this.blocks.find(block => block.id === id);
+    // console.log("get", id, this.extensions);
+    
+     let block = this.blocks.find(block => block.id === id);
+
+     if (block) {
+       return block;
+     } else {
+       if (this.extensions) {
+        for (let extension of this.extensions) {
+          
+          block = extension.getBlock(id);
+
+          if (block) {
+            return block;
+          }
+        }
+       }
+        
+     }
   }
 
   get firstBlock(): TgsGameBlock {

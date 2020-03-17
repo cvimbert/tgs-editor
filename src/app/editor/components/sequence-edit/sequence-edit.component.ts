@@ -54,7 +54,7 @@ export class SequenceEditComponent implements OnInit {
   loadFile(path: string) {
     this.content = "";
     this.filesManager.loadFile(path).then(content => {
-      this.content = content.replace(/(?:\r\n|\r|\n)/g, '\n');
+      this.content = content;
 
       setTimeout(() => this.editor.codeMirror.getDoc().clearHistory());
 
@@ -64,13 +64,14 @@ export class SequenceEditComponent implements OnInit {
   }
 
   compileContent() {
-    let res = this.compiler.parseTGSString(this.content, TgsMainStructure);
-    res.fillObject(res);
-    this.sequenceService.currentSequence = <TgsMainStructure>res;
+    this.sequenceService.manager.loadTgsString(this.content).then(struct => {
+      
+      this.sequenceService.currentSequence = struct;
 
-    if (this.previewDisplay) {
-      this.previewDisplay.update();
-    }
+      if (this.previewDisplay) {
+        this.previewDisplay.update();
+      }
+    }).catch(e => console.log(e));
   }
 
   resetThread() {
@@ -109,6 +110,10 @@ export class SequenceEditComponent implements OnInit {
 
         case "b":
           this.threadBack();
+          break;
+
+        case "l":
+          this.insertTextAtCurrentPosition("\n  * text -> #dest")
           break;
       }
     }
@@ -229,6 +234,12 @@ export class SequenceEditComponent implements OnInit {
     }
   } */
 
+  insertTextAtCurrentPosition(text: string) {
+    var doc = this.editor.codeMirror.getDoc();
+    var cursor = doc.getCursor();
+    doc.replaceRange(text, cursor);
+  }
+
   selectBlock(model: TgsGameBlock) {
     this.editor.codeMirror.focus();
 
@@ -293,8 +304,6 @@ export class SequenceEditComponent implements OnInit {
         }
         
         this.currentBlock = block;
-
-        // this.ref.detectChanges();
         return;
       }
 

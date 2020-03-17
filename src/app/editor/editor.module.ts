@@ -13,6 +13,7 @@ import { NgxElectronModule } from 'ngx-electron';
 import { PreviewDisplayComponent } from './components/preview-display/preview-display.component';
 import { SequenceStepDisplayComponent } from './components/sequence-step-display/sequence-step-display.component';
 import { PreviewDisplayBlockComponent } from './components/preview-display-block/preview-display-block.component';
+import { PreviewLineDisplayComponent } from './components/preview-line-display/preview-line-display.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PreviewDisplayBlockComponent } from './components/preview-display-block
     SequenceEditComponent,
     PreviewDisplayComponent,
     SequenceStepDisplayComponent,
-    PreviewDisplayBlockComponent
+    PreviewDisplayBlockComponent,
+    PreviewLineDisplayComponent
   ],
   providers: [
     FilesManagerService

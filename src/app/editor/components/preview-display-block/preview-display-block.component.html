@@ -1,5 +1,7 @@
-<div class="container" *ngIf="block">
-  <div *ngFor="let text of block.linesText">{{ text }}</div>
+<div class="container" *ngIf="block && block.complexBlocks">
+  <ng-container *ngFor="let cblock of block.complexBlocks">
+    <preview-line-display *ngFor="let line of cblock.lines" [line]="line"></preview-line-display>
+  </ng-container>
 </div>
 <div class="links">
   <ng-container *ngIf="block && block.links && isLast">

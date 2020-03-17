@@ -2,6 +2,7 @@ import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-comp
 import { JsonObject, JsonProperty } from 'json2typescript';
 import { TgsBlockId } from './tgs-block-id.class';
 import { TgsMainStructure } from './tgs-main-structure.class';
+import { TgsGameBlock } from './tgs-game-block.class';
 
 @JsonObject("TgsTemplateExpression")
 export class TgsTemplateExpression extends BaseLanguageItem {
@@ -38,15 +39,19 @@ export class TgsTemplateExpression extends BaseLanguageItem {
   @JsonProperty("referencedBlockId")
   referencedBlockId = "";
 
+  // referencedBlock: TgsGameBlock;
+
   constructObject() {
     this.referencedBlockId = (<TgsBlockId>this.getFirstResult("content/blockId")).id;
-    // console.log(this.getFirstResult("content/blockId"));
+  }
+
+  get referencedBlock(): TgsGameBlock {
+    return (<TgsMainStructure>this.root).getBlock(this.referencedBlockId);
   }
 
   get texts(): string[] {
     if (this.referencedBlockId) {
-
-      let block = (<TgsMainStructure>this.root).blocks.find(block => block.id === this.referencedBlockId);
+      let block = (<TgsMainStructure>this.root).getBlock(this.referencedBlockId);
 
       if (block) {
         return block.linesText;

@@ -6,6 +6,7 @@ import { BaseLanguageItem } from './base-language-item.class';
 export class Compiler {
 
   parseTGSString(text: string, languageElement: any): BaseLanguageItem {
+    text = text.replace(/\r?\n|\r/g, "\n");
     let res = this.parseStringAt(text, languageElement, languageElement, null);
     return res;
   }
@@ -159,13 +160,13 @@ export class Compiler {
     if (assertion.expression) {
 
       let regExpAdditions = "^";
-      regExpAdditions += !assertion.leaveStartSpaces ? "\\s*" : "";
+      regExpAdditions += !assertion.leaveStartSpaces ? "\\s*?" : "";
       
       /*this.configuration.comments.forEach(comment => {
         regExpAdditions += comment.expression.source;
       });*/
 
-      regExpAdditions += !assertion.leaveStartSpaces ? "\\s*" : "";
+      // regExpAdditions += !assertion.leaveStartSpaces ? "\\s*" : "";
 
       let exp = new RegExp(regExpAdditions + assertion.expression.source);
 
