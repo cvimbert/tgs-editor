@@ -1,6 +1,6 @@
 @headers {
 	name: "Séquence de test 1";
-    extends: dqsdqs/sdqs/hhhh.iii;
+    extends: projects/p1/one, projects/p1/two;
 }
 
 #first

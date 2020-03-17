@@ -93,14 +93,11 @@ export class TgsHeaders extends BaseLanguageItem {
       this.title = (<TgsString>titleLine.getFirstResult("argumentsList/simple/string")).value;      
     }
 
-    let extensionLine = this.getLine("extends");
-
-    console.log(extensionLine);
-    
+    let extensionLine = this.getLine("extends");    
 
     if (extensionLine) {
       let extensionItems = <TgsPath[]>extensionLine.getResults("argumentsList/simple/path");
-      this.extensionList = extensionItems.map(item => item.fullPath);
+      this.extensionList = extensionItems.map(item => item.getFullPath());
     }
   }
 }

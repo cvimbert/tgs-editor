@@ -33,12 +33,19 @@ export class TgsPath extends BaseLanguageItem {
   baseName: string;
   folders: string[];
 
-  get fullPath(): string {
-    return this.folders.join("/") + "/" + this.baseName;
+  separator = "/";
+
+  getFullPath(relativeTo?: string): string {
+    return (this.folders || []).join(this.separator) + this.separator + this.baseName;
   }
 
   constructObject() {
     this.baseName = this.getFirstValue("baseNameGroup@baseName");
-    this.folders = this.getResults("path").map(path => path.getFirstValue("val@val"));    
+
+    let res = this.getResults("path");
+
+    if (res) {
+      this.folders = res.map(path => path.getFirstValue("val@val"));
+    }
   }
 }

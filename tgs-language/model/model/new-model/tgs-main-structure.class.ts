@@ -26,6 +26,7 @@ export class TgsMainStructure extends BaseLanguageItem {
   blocks: TgsGameBlock[] = [];
 
   headers: TgsHeaders;
+  extensions: TgsMainStructure[];
 
   constructObject() {
     this.blocks = <TgsGameBlock[]>this.getResults("gameBlock") || [];

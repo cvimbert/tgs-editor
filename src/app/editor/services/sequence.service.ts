@@ -3,6 +3,8 @@ import { TgsMainStructure } from 'tgs-model';
 import { SequenceThread } from 'src/app/sequence-thread/sequence-thread.class';
 import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
 import { FilesManagerService } from './files-manager.service';
+import { TgsManager } from 'tgs-model/model/new-model/tgs-manager.class';
+import { ElectronService } from 'ngx-electron';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,8 @@ export class SequenceService {
   currentSequence: TgsMainStructure;
   threadPath: string;
 
+  manager: TgsManager;
+
   private serializer = new JsonConvert(
     OperationMode.ENABLE,
     ValueCheckingMode.ALLOW_NULL,
@@ -20,8 +24,13 @@ export class SequenceService {
   );
 
   constructor(
-    private filesManager: FilesManagerService
-  ) {}
+    private filesManager: FilesManagerService,
+    electronService: ElectronService
+  ) {
+    this.manager = new TgsManager(electronService.remote.require("fs"));
+
+    this.manager.loadTgsFile("projects/p1/index").then(struct => console.log(struct)).catch(e => console.log(e));
+  }
 
   loadThread(path: string) {
     this.currentThread = null;
