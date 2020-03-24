@@ -1,5 +1,7 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
+import { JsonProperty, JsonObject } from 'json2typescript';
 
+@JsonObject("TgsPath")
 export class TgsPath extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
@@ -30,8 +32,11 @@ export class TgsPath extends BaseLanguageItem {
     }
   }
 
-  baseName: string;
-  folders: string[];
+  @JsonProperty("baseName", String, true)
+  baseName = "";
+
+  @JsonProperty("folders", [String], true)
+  folders: string[] = [];
 
   separator = "/";
 

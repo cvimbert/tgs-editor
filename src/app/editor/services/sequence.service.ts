@@ -50,4 +50,9 @@ export class SequenceService {
       console.log("No thread to save.");
     }
   }
+
+  exportSequence() {
+    let json = this.serializer.serializeObject(this.currentSequence);
+    console.log(JSON.stringify(json));
+  }
 }

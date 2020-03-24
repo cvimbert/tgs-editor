@@ -1,5 +1,7 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
+@JsonObject("TgsString")
 export class TgsString extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
@@ -21,6 +23,7 @@ export class TgsString extends BaseLanguageItem {
     ]
   };
 
+  @JsonProperty("value", String, true)
   value = "";
 
   constructObject() {

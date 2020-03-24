@@ -1,52 +1,36 @@
 @headers {
-	name: "Séquence de test 1";
-    extends: projects/p1/one, projects/p1/two;
+	name: "Séquence d'initialisation";
 }
 
-#first
-	
-    Texte first block dddddsssddd
-    dddddddd
-    fdsfsdfsd et voilà un autre mot !
-    --------
-    { #firstone }
-    --------
-    Et voilà !!!!
-    
-  * Vers le second -> #second
-  * Vers b1 -> #b1
-  * Vers f1 -> #firstone
-  * dqsdqsdq -> #dest
-  
 
-#second
+#start
 
-    Re-yes
+	Initialisation
     ----
-    { #firsttwo }
+    Chargement de la séquence système
     ----
-    encore
+    Erreur
+    ----
+    Core action requise :
     
-    Avec une typo lisible et agréable, qui ne fasse pas trop "code".
-  
-    * branche1 -> #b1
-    * branche2 -> #b2
+    * A125 -Redémarrage système -> #resetSystem
+    * B654 - Forcer la séquence -> #forceSequence
+    * U776 - Attente -> #attente
     
 
-#b1
+#resetSystem
 
-	Texte b1
+	Redémarage système en cours....
+    ----
     
-    * réinit -> #first
+  * Go -> #start
 
 
-#b2
+#forceSequence
 
-	Texte b2
-    
-    * réinit -> #first
+	Txt...
 
 
-#dest
+#attente
 
 	Txt...

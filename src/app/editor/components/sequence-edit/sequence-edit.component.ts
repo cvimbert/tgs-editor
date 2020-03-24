@@ -82,6 +82,10 @@ export class SequenceEditComponent implements OnInit {
     this.sequenceService.currentThread.goBack();
   }
 
+  exportFile() {
+    this.sequenceService.exportSequence();
+  }
+
   saveFile(path: string) {
     this.filesManager.saveToFile(path, this.content).then(() => console.log("File saved."));
     this.sequenceService.saveThread();

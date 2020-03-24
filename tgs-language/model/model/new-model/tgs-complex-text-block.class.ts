@@ -15,7 +15,7 @@ export class TgsComplexTextBlock extends BaseLanguageItem {
     ]
   };
 
-  @JsonProperty("line", [TgsGameBlockLine], true)
+  @JsonProperty("lines", [TgsGameBlockLine], true)
   lines: TgsGameBlockLine[] = [];
 
   constructObject() {

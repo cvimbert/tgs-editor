@@ -35,6 +35,7 @@ export class TgsGameBlockLine extends BaseLanguageItem {
     }
   };
 
+  @JsonProperty("isBreak", Boolean, true)
   isBreak = false;
 
   @JsonProperty("directText", String, true)

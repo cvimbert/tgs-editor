@@ -1,7 +1,9 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
 import { TgsString } from './tgs-string.class';
 import { TgsPath } from './tgs-path.class';
+import { JsonProperty, JsonObject } from 'json2typescript';
 
+@JsonObject("TgsHeaders")
 export class TgsHeaders extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {
@@ -76,16 +78,22 @@ export class TgsHeaders extends BaseLanguageItem {
     }
   };
 
+  @JsonProperty("title", String, true)
   title = "";
-  extensionList: string[];
-  private lines: BaseLanguageItem[];
+
+  @JsonProperty("extensionList", [String], true)
+  extensionList: string[] = [];
+
+  // n'a pas à être serialiser
+  private lines: BaseLanguageItem[] = [];
+
 
   getLine(id: string): BaseLanguageItem {
     return this.lines.find(line => line.getFirstValue("nameGroup@name") === id);
   }
 
   constructObject() {
-    this.lines = <BaseLanguageItem[]>this.getResults("headerLine");
+    this.lines = <BaseLanguageItem[]>this.getResults("headerLine");    
 
     let titleLine = this.getLine("name");
 
