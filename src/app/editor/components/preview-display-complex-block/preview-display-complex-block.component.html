@@ -1,0 +1,11 @@
+<span [ngClass]="classArray">
+
+  <ng-container *ngIf="complexBlock.lines">
+    <preview-line-display *ngFor="let line of complexBlock.lines" [line]="line"></preview-line-display>
+  </ng-container>
+  
+  <ng-container *ngIf="complexBlock.subBlocks">
+    <preview-display-complex-block *ngFor="let block of complexBlock.subBlocks" [complexBlock]="block"></preview-display-complex-block>
+  </ng-container>
+  
+</span>

@@ -1,1 +1,1 @@
-{"steps":[{"blockId":"start"},{"blockId":"resetSystem"},{"blockId":"start"}]}
+{"steps":[{"blockId":"start"},{"blockId":"attente"},{"blockId":"forceSequence"}]}

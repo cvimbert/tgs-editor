@@ -1,6 +1,6 @@
 <div class="container" *ngIf="block && block.complexBlocks">
   <ng-container *ngFor="let cblock of block.complexBlocks">
-    <preview-line-display *ngFor="let line of cblock.lines" [line]="line"></preview-line-display>
+    <preview-display-complex-block [complexBlock]="cblock"></preview-display-complex-block>
   </ng-container>
 </div>
 <div class="links">

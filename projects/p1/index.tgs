@@ -1,36 +1,77 @@
 @headers {
 	name: "Séquence d'initialisation";
+    defaultTimeout: 1s;
 }
 
 
 #start
 
-	Initialisation
-    ----
-    Chargement de la séquence système
-    ----
-    Erreur
-    ----
-    Core action requise :
+	[<b, i, delay(100ms)>Redémarrage de la cellule
+    de confinement...]
+    ++++ 3s [points]
+   	... redémarrage OK
+    ++++ 0.8s
+    Initalisation de la séquence de [<i>récupération]
+    ++++ 3s [points]
+    ... intialisation OK
+    ++++ 0.8s
+    Décompression des données IA
+    ++++ 3s [points]
+    ... décompression OK
+    ++++ 0.8s
+    Exécution du noyau IA
+    ++++ 3s [points]
+    Erreur 1 !!!
+    ++++ 0.2s
+    Erreur 1 !!!
+    ++++ 0.2s
+    Erreur 1 !!!
+    ++++ 0.2s
+    Action requise
     
-    * A125 -Redémarrage système -> #resetSystem
-    * B654 - Forcer la séquence -> #forceSequence
-    * U776 - Attente -> #attente
+    
+    * Redémarrage système -> #resetSystem
+    * Forcer la séquence -> #forceSequence
+    * Attente des données d'erreur -> #attente
     
 
 #resetSystem
 
 	Redémarage système en cours....
-    ----
+    ++++ 2s [points]
+    Redémarrage effectué
+    ++++ 0.2s
     
-  * Go -> #start
+  * Continuer -> #start
 
 
 #forceSequence
 
-	Txt...
+	Forçage de la séquence principale
+    ++++ 2s [points]
+    Forçage de la routine d'éxécution
+    ++++ 2s [points]
+    Succès
+    
+    * Continuer -> #continue
 
 
 #attente
 
-	Txt...
+	...
+	++++ 2s [points]
+    ...
+    ++++ 2s [points]
+    ...
+    ++++ 2s [points]
+    Aucune réception de nouvelle donnée
+    ++++ 0.2
+    Action requise
+    
+    * Redémarrage système -> #resetSystem
+    * Forcer la séquence -> #forceSequence
+
+
+#continue
+
+	Et la suite....

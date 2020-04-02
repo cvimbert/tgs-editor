@@ -14,6 +14,7 @@ import { PreviewDisplayComponent } from './components/preview-display/preview-di
 import { SequenceStepDisplayComponent } from './components/sequence-step-display/sequence-step-display.component';
 import { PreviewDisplayBlockComponent } from './components/preview-display-block/preview-display-block.component';
 import { PreviewLineDisplayComponent } from './components/preview-line-display/preview-line-display.component';
+import { PreviewDisplayComplexBlockComponent } from './components/preview-display-complex-block/preview-display-complex-block.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PreviewLineDisplayComponent } from './components/preview-line-display/p
     PreviewDisplayComponent,
     SequenceStepDisplayComponent,
     PreviewDisplayBlockComponent,
-    PreviewLineDisplayComponent
+    PreviewLineDisplayComponent,
+    PreviewDisplayComplexBlockComponent
   ],
   providers: [
     FilesManagerService

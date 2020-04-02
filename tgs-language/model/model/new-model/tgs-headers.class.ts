@@ -2,6 +2,7 @@ import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-comp
 import { TgsString } from './tgs-string.class';
 import { TgsPath } from './tgs-path.class';
 import { JsonProperty, JsonObject } from 'json2typescript';
+import { TgsDuration } from './tgs-duration.class';
 
 @JsonObject("TgsHeaders")
 export class TgsHeaders extends BaseLanguageItem {
@@ -62,6 +63,10 @@ export class TgsHeaders extends BaseLanguageItem {
         type: AssertionsGroupType.OR,
         assertions: [
           {
+            id: "duration",
+            reference: TgsDuration
+          },
+          {
             id: "path",
             reference: TgsPath
           },
@@ -83,6 +88,9 @@ export class TgsHeaders extends BaseLanguageItem {
 
   @JsonProperty("extensionList", [String], true)
   extensionList: string[] = [];
+
+  @JsonProperty("defaultTimeout", Number, true)
+  defaultTimeout = 0;
 
   // n'a pas à être serialiser
   private lines: BaseLanguageItem[] = [];
@@ -106,6 +114,13 @@ export class TgsHeaders extends BaseLanguageItem {
     if (extensionLine) {
       let extensionItems = <TgsPath[]>extensionLine.getResults("argumentsList/simple/path");
       this.extensionList = extensionItems.map(item => item.getFullPath());
+    }
+
+    let durationLine = this.getLine("defaultTimeout");    
+
+    if (durationLine) {
+      let duration = <TgsDuration>durationLine.getFirstResult("argumentsList/simple/duration");
+      this.defaultTimeout = duration.getTimeInSeconds();
     }
   }
 }
