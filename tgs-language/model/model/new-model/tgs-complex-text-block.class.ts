@@ -3,6 +3,7 @@ import { TgsGameBlockLine } from './tgs-game-block-line.class';
 import { JsonObject, JsonProperty } from 'json2typescript';
 import { TgsStyleHeader } from './tgs-style-header.class';
 import { TgsStyleArgument } from './tgs-style-argument.class';
+import { TgsConditionHeader } from './tgs-condition-header.class';
 
 @JsonObject("TgsComplexTextBlock")
 export class TgsComplexTextBlock extends BaseLanguageItem {
@@ -28,6 +29,11 @@ export class TgsComplexTextBlock extends BaseLanguageItem {
             expression: /\[/
           },
           {
+            id: "condition",
+            reference: TgsConditionHeader,
+            iterator: "?"
+          },
+          {
             id: "style",
             reference: TgsStyleHeader,
             iterator: "?"
@@ -47,14 +53,17 @@ export class TgsComplexTextBlock extends BaseLanguageItem {
   };
 
   // Bizarre, cet array, vu qu'il ne peut y avoir qu'une ligne...
-  @JsonProperty("lines", [TgsGameBlockLine], true)
+  @JsonProperty("l", [TgsGameBlockLine], true)
   lines: TgsGameBlockLine[] = [];
 
-  @JsonProperty("subBlocks", [TgsComplexTextBlock], true)
+  @JsonProperty("sb", [TgsComplexTextBlock], true)
   subBlocks: TgsComplexTextBlock[];
 
-  @JsonProperty("styles", TgsStyleHeader, true)
+  @JsonProperty("st", TgsStyleHeader, true)
   styles: TgsStyleHeader = null;
+
+  @JsonProperty("c", TgsConditionHeader, true)
+  condition: TgsConditionHeader = null;
 
   constructObject() {
     let firstKey = this.getFirstKey();
@@ -67,6 +76,7 @@ export class TgsComplexTextBlock extends BaseLanguageItem {
       case "lineInBrackets":        
         this.subBlocks = <TgsComplexTextBlock[]>this.getResults("lineInBrackets/line");
         this.styles = <TgsStyleHeader>this.getFirstResult("lineInBrackets/style");
+        this.condition = <TgsConditionHeader>this.getFirstResult("lineInBrackets/condition");
         break;
     }
   }

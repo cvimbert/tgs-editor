@@ -45,6 +45,8 @@ export class SequenceService {
   saveThread() {
     if (this.currentThread) {
       let obj = this.serializer.serializeObject(this.currentThread);
+      console.log(obj);
+      
       this.filesManager.saveToFile(this.threadPath, JSON.stringify(obj));
     } else {
       console.log("No thread to save.");
@@ -53,6 +55,8 @@ export class SequenceService {
 
   exportSequence() {
     let json = this.serializer.serializeObject(this.currentSequence);
-    console.log(JSON.stringify(json));
+
+    this.filesManager.saveToFile("C:/unity/Spaceship/Assets/Resources/Sequence1.json", JSON.stringify(json));
+    console.log("exported");
   }
 }

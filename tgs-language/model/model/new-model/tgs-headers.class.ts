@@ -3,6 +3,7 @@ import { TgsString } from './tgs-string.class';
 import { TgsPath } from './tgs-path.class';
 import { JsonProperty, JsonObject } from 'json2typescript';
 import { TgsDuration } from './tgs-duration.class';
+import { TgsFloat } from './primitive-variables/tgs-float.class';
 
 @JsonObject("TgsHeaders")
 export class TgsHeaders extends BaseLanguageItem {
@@ -67,6 +68,10 @@ export class TgsHeaders extends BaseLanguageItem {
             reference: TgsDuration
           },
           {
+            id: "float",
+            reference: TgsFloat
+          },
+          {
             id: "path",
             reference: TgsPath
           },
@@ -83,20 +88,26 @@ export class TgsHeaders extends BaseLanguageItem {
     }
   };
 
-  @JsonProperty("title", String, true)
+  @JsonProperty("t", String, true)
   title = "";
 
-  @JsonProperty("extensionList", [String], true)
+  @JsonProperty("el", [String], true)
   extensionList: string[] = [];
 
-  @JsonProperty("defaultTimeout", Number, true)
+  @JsonProperty("dt", Number, true)
   defaultTimeout = 0;
 
-  // n'a pas à être serialiser
+  @JsonProperty("dfs", Number, true)
+  defaultFontSize = -1;
+
+  @JsonProperty("dff", String, true)
+  defaultFontFamily = "";
+
+  // n'a pas à être serialisé
   private lines: BaseLanguageItem[] = [];
 
 
-  getLine(id: string): BaseLanguageItem {
+  getLine(id: string): BaseLanguageItem {    
     return this.lines.find(line => line.getFirstValue("nameGroup@name") === id);
   }
 
@@ -121,6 +132,18 @@ export class TgsHeaders extends BaseLanguageItem {
     if (durationLine) {
       let duration = <TgsDuration>durationLine.getFirstResult("argumentsList/simple/duration");
       this.defaultTimeout = duration.getTimeInSeconds();
+    }
+
+    let fontSizeLine = this.getLine("fontSize");    
+
+    if (fontSizeLine) {
+      this.defaultFontSize = (<TgsFloat>fontSizeLine.getFirstResult("argumentsList/simple/float")).value;
+    }
+
+    let fontFamilyLine = this.getLine("fontFamily");
+
+    if (fontFamilyLine) {
+      this.defaultFontFamily = (<TgsString>fontFamilyLine.getFirstResult("argumentsList/simple/string")).value;
     }
   }
 }

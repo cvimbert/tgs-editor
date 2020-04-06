@@ -16,7 +16,6 @@ export class TgsDuration extends BaseLanguageItem {
         id: "unit",
         expression: /(s|ms)/,
         groups: ["unit"],
-        iterator: "?"
       }
     ]
   };

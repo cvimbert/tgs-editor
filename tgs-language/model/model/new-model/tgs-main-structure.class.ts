@@ -22,10 +22,10 @@ export class TgsMainStructure extends BaseLanguageItem {
     ]
   };
 
-  @JsonProperty("blocks", [TgsGameBlock], true)
+  @JsonProperty("b", [TgsGameBlock], true)
   blocks: TgsGameBlock[] = [];
 
-  @JsonProperty("headers", TgsHeaders, true)
+  @JsonProperty("h", TgsHeaders, true)
   headers: TgsHeaders;
 
   // Pas besoin d'être sérialisé... à priori

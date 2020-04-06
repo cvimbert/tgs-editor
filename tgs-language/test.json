@@ -1,0 +1,583 @@
+{
+  "b": [
+    {
+      "i": "start",
+      "cb": [
+        {
+          "l": [],
+          "st": {
+            "bs": [
+              "b",
+              "i"
+            ],
+            "td": 0.1
+          },
+          "sb": [
+            {
+              "l": [
+                {
+                  "ip": false,
+                  "pf": 0,
+                  "pa": "",
+                  "du": "ms",
+                  "ib": false,
+                  "dt": "Redémarrage de la cellule"
+                }
+              ]
+            },
+            {
+              "l": [
+                {
+                  "ip": false,
+                  "pf": 0,
+                  "pa": "",
+                  "du": "ms",
+                  "ib": false,
+                  "dt": "de confinement..."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 3,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "... redémarrage OK"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 0.8,
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Initalisation de la séquence de "
+            }
+          ]
+        },
+        {
+          "l": [],
+          "st": {
+            "bs": [
+              "i"
+            ],
+            "td": 0
+          },
+          "sb": [
+            {
+              "l": [
+                {
+                  "ip": false,
+                  "pf": 0,
+                  "pa": "",
+                  "du": "ms",
+                  "ib": false,
+                  "dt": "récupération"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 3,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "... intialisation OK"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 0.8,
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Décompression des données IA"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 3,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "... décompression OK"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 0.8,
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Exécution du noyau IA"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 3,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [],
+          "st": {
+            "bs": [
+              "b"
+            ],
+            "td": 0
+          },
+          "sb": [
+            {
+              "l": [
+                {
+                  "ip": false,
+                  "pf": 0,
+                  "pa": "",
+                  "du": "ms",
+                  "ib": false,
+                  "dt": "Erreur 1 !!!"
+                }
+              ]
+            },
+            {
+              "l": [
+                {
+                  "ip": true,
+                  "pf": 0.2,
+                  "du": "s",
+                  "ib": false
+                }
+              ]
+            },
+            {
+              "l": [
+                {
+                  "ip": false,
+                  "pf": 0,
+                  "pa": "",
+                  "du": "ms",
+                  "ib": false,
+                  "dt": "Erreur 1 !!!"
+                }
+              ]
+            },
+            {
+              "l": [
+                {
+                  "ip": true,
+                  "pf": 0.2,
+                  "du": "s",
+                  "ib": false
+                }
+              ]
+            },
+            {
+              "l": [
+                {
+                  "ip": false,
+                  "pf": 0,
+                  "pa": "",
+                  "du": "ms",
+                  "ib": false,
+                  "dt": "Erreur 1 !!!"
+                }
+              ]
+            },
+            {
+              "l": [
+                {
+                  "ip": true,
+                  "pf": 0.2,
+                  "du": "s",
+                  "ib": false
+                }
+              ]
+            },
+            {
+              "l": [
+                {
+                  "ip": false,
+                  "pf": 0,
+                  "pa": "",
+                  "du": "ms",
+                  "ib": false,
+                  "dt": "Action requise"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "l": [
+        {
+          "t": " Redémarrage système",
+          "ll": "resetSystem"
+        },
+        {
+          "t": " Forcer la séquence",
+          "ll": "forceSequence"
+        },
+        {
+          "t": " Attente des données d'erreur",
+          "ll": "attente"
+        }
+      ]
+    },
+    {
+      "i": "resetSystem",
+      "cb": [
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Redémarage système en cours...."
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 2,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Redémarrage effectué"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 0.2,
+              "du": "s",
+              "ib": false
+            }
+          ]
+        }
+      ],
+      "l": [
+        {
+          "t": " Continuer",
+          "ll": "start"
+        }
+      ]
+    },
+    {
+      "i": "forceSequence",
+      "cb": [
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Forçage de la séquence principale"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 2,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Forçage de la routine d'éxécution"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 2,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Succès"
+            }
+          ]
+        }
+      ],
+      "l": [
+        {
+          "t": " Continuer",
+          "ll": "continue"
+        }
+      ]
+    },
+    {
+      "i": "attente",
+      "cb": [
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "..."
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 2,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "..."
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 2,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "..."
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 2,
+              "pa": "points",
+              "du": "s",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Aucune réception de nouvelle donnée"
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": true,
+              "pf": 0.2,
+              "du": "ms",
+              "ib": false
+            }
+          ]
+        },
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Action requise"
+            }
+          ]
+        }
+      ],
+      "l": [
+        {
+          "t": " Redémarrage système",
+          "ll": "resetSystem"
+        },
+        {
+          "t": " Forcer la séquence",
+          "ll": "forceSequence"
+        }
+      ]
+    },
+    {
+      "i": "continue",
+      "cb": [
+        {
+          "l": [
+            {
+              "ip": false,
+              "pf": 0,
+              "pa": "",
+              "du": "ms",
+              "ib": false,
+              "dt": "Et la suite...."
+            }
+          ]
+        }
+      ],
+      "l": []
+    }
+  ],
+  "h": {
+    "t": "Séquence d'initialisation",
+    "el": [],
+    "dt": 0.02
+  }
+}

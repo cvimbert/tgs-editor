@@ -3,7 +3,7 @@ import { TgsDuration } from './tgs-duration.class';
 import { TgsBoolean } from './primitive-variables/tgs-boolean.class';
 import { TgsString } from './tgs-string.class';
 import { TgsFloat } from './primitive-variables/tgs-float.class';
-import { JsonObject, JsonProperty } from 'json2typescript';
+import { JsonObject, JsonProperty, Any } from 'json2typescript';
 
 @JsonObject("TgsValue")
 export class TgsValue extends BaseLanguageItem {
@@ -30,10 +30,11 @@ export class TgsValue extends BaseLanguageItem {
     ]
   };
 
-  @JsonProperty("type", String, true)
+  @JsonProperty("t", String, true)
   type: string = "";
 
-  value: any;
+  @JsonProperty("v", Any, true)
+  value: any = null;
 
   constructObject() {
     this.type = this.getFirstKey();

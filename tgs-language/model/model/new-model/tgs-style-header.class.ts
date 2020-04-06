@@ -45,11 +45,11 @@ export class TgsStyleHeader extends BaseLanguageItem {
 
   styles: TgsStyleArgument[] = [];
 
-  @JsonProperty("basicStyles", [String], true)
+  @JsonProperty("bs", [String], true)
   basicStyles: string[] = [];
 
-  @JsonProperty("typewritingDelay", Number, true)
-  typewritingDelay = 0;
+  @JsonProperty("td", Number, true)
+  typewritingDelay = -1;
 
   constructObject() {
     let l1 = <TgsStyleArgument[]>this.getResults("l1/arg");

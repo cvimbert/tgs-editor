@@ -2,6 +2,7 @@ import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-comp
 import { JsonObject, JsonProperty } from 'json2typescript';
 import { TgsTemplateExpression } from './tgs-template-expression.class';
 import { TgsDuration } from './tgs-duration.class';
+import { TgsInlineCommand } from './tgs-inline-command.class';
 
 @JsonObject("TgsGameBlockLine")
 export class TgsGameBlockLine extends BaseLanguageItem {
@@ -9,6 +10,10 @@ export class TgsGameBlockLine extends BaseLanguageItem {
   static assertions: AssertionsGroup = {
     type: AssertionsGroupType.OR,
     assertions: [
+      {
+        id: "command",
+        reference: TgsInlineCommand
+      },
       {
         id: "pause",
         reference: "pause"
@@ -59,39 +64,48 @@ export class TgsGameBlockLine extends BaseLanguageItem {
     }
   };
 
-  @JsonProperty("isPause", Boolean, true)
+  @JsonProperty("ip", Boolean, true)
   isPause = false;
 
-  @JsonProperty("pauseDuration", Number, true)
+  @JsonProperty("pd", Number, true)
   pauseDuration = 0;
 
-  @JsonProperty("pauseAction", String, true)
+  @JsonProperty("pa", String, true)
   pauseAction = "";
 
-  @JsonProperty("durationUnit", String, true)
+  @JsonProperty("du", String, true)
   durationUnit = "ms";
 
-  @JsonProperty("isBreak", Boolean, true)
+  @JsonProperty("ib", Boolean, true)
   isBreak = false;
 
-  @JsonProperty("directText", String, true)
+  @JsonProperty("dt", String, true)
   directText = "";
 
-  @JsonProperty("template", TgsTemplateExpression, true)
+  @JsonProperty("t", TgsTemplateExpression, true)
   template: TgsTemplateExpression = null;
+
+  @JsonProperty("c", TgsInlineCommand, true)
+  command: TgsInlineCommand = null;
 
   constructObject() {
     this.directText = this.getFirstValue("blockline/blockline@text");
     this.template = <TgsTemplateExpression>this.getFirstResult("blockline/template");
 
-    this.isBreak = this.getFirstKey() === "doubleBreak";
-    this.isPause = this.getFirstKey() === "pause";
+    let firstKey = this.getFirstKey();
+
+    this.isBreak = firstKey === "doubleBreak";
+    this.isPause = firstKey === "pause";
 
     if (this.isPause) {
       let duration = <TgsDuration>this.getFirstResult("pause/duration");
       this.pauseDuration = duration.time;
       this.durationUnit = duration.unit;
       this.pauseAction = this.getFirstValue("pause/action@name");
+    }
+
+    if (firstKey === "command") {
+      this.command = <TgsInlineCommand>this.getFirstResult("command");      
     }
   }
 

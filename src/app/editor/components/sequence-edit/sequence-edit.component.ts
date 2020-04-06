@@ -119,6 +119,10 @@ export class SequenceEditComponent implements OnInit {
         case "l":
           this.insertTextAtCurrentPosition("\n  * text -> #dest")
           break;
+
+        case "e":
+          this.exportFile();
+          break;
       }
     }
   }

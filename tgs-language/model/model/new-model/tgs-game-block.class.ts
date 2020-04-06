@@ -36,13 +36,13 @@ export class TgsGameBlock extends BaseLanguageItem {
     ]
   };
 
-  @JsonProperty("id", String, true)
+  @JsonProperty("i", String, true)
   id = "";
 
-  @JsonProperty("complexBlocks", [TgsComplexTextBlock], true)
+  @JsonProperty("cb", [TgsComplexTextBlock], true)
   complexBlocks: TgsComplexTextBlock[] = [];
 
-  @JsonProperty("links", [TgsLinkItem], true)
+  @JsonProperty("l", [TgsLinkItem], true)
   links: TgsLinkItem[] = [];
 
   constructObject() {

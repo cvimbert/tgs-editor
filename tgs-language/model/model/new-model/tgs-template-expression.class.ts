@@ -36,7 +36,7 @@ export class TgsTemplateExpression extends BaseLanguageItem {
     }
   };
 
-  @JsonProperty("referencedBlockId", String, true)
+  @JsonProperty("rb", String, true)
   referencedBlockId = "";
 
   // referencedBlock: TgsGameBlock;

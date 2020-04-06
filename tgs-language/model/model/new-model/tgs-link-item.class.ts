@@ -68,13 +68,13 @@ export class TgsLinkItem extends BaseLanguageItem {
     }
   };
 
-  @JsonProperty("text", String, true)
+  @JsonProperty("t", String, true)
   text = "";
 
-  @JsonProperty("localLinkRef", String, true)
+  @JsonProperty("ll", String, true)
   localLinkRef = "";
 
-  @JsonProperty("globalLinkRef", String, true)
+  @JsonProperty("gl", String, true)
   globalLinkRef = "";
 
   constructObject() {
