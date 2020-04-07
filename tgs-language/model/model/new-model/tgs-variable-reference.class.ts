@@ -24,7 +24,7 @@ export class TgsVariableReference extends BaseLanguageItem {
           {
             id: "item",
             expression: /([A-Za-z0-9]+)/,
-            groups: ["value"]
+            groups: ["val"]
           }
         ]
       },
@@ -52,13 +52,15 @@ export class TgsVariableReference extends BaseLanguageItem {
   variablePath: string[] = [];
 
   constructObject() {
-    this.variableName = this.getFirstValue("l2/item@value");
+    var l2res = this.getFirstResult("l2");
+
+    this.variableName = l2res.getFirstValue("item@val");
 
     let l1res = this.getResults("l1");
 
     if (l1res) {
-      this.variablePath = l1res.map(res => res.getFirstValue("item/item@value"));
-    }
+      this.variablePath = l1res.map(res => res.getFirstValue("item/item@val"));
+    }    
   }
 
   getValue(): any {

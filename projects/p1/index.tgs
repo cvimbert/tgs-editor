@@ -8,12 +8,14 @@
 
 #start
 
+
 	[<b, i>Redémarrage de la cellule
     de confinement...]
     ++++ 3s [points]
     
-    >> nextt (30, "oo", false)
-    
+    >> sound("tick")
+    >> yop.ok = 5
+        
    	[(? true)
     	... redémarrage OK
     	++++ 0.8s
@@ -22,6 +24,8 @@
       ...sdsqdqs
       ++++ 0.8s
     ]
+    
+    >> sound("tick")
     
     Initalisation de la séquence de [<i>récupération]
     ++++ 3s [points]
@@ -42,12 +46,14 @@
     Action requise]
     
     
-    * Redémarrage système -> #resetSystem
-    * Forcer la séquence -> #forceSequence
+    * (? false) Redémarrage système -> #resetSystem
+    * (? true) Forcer la séquence -> #forceSequence
     * Attente des données d'erreur -> #attente
     
 
 #resetSystem
+
+	>> clear()
 
 	Redémarage système en cours....
     ++++ 2s [points]
@@ -58,6 +64,8 @@
 
 
 #forceSequence
+
+	>> clear()
 
 	Forçage de la séquence principale
     ++++ 2s [points]

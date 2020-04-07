@@ -43,7 +43,8 @@ export class TgsInlineCommand extends BaseLanguageItem {
           },
           {
             id: "argsList",
-            reference: "argsList"
+            reference: "argsList",
+            iterator: "?"
           },
           {
             id: "closer",

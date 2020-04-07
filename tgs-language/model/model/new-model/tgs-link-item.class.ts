@@ -1,6 +1,8 @@
 import { AssertionsGroup, AssertionsGroupType, BaseLanguageItem } from 'tgs-compiler';
 import { TgsBlockId } from './tgs-block-id.class';
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { TgsConditionHeader } from './tgs-condition-header.class';
+import { TgsStyleHeader } from './tgs-style-header.class';
 
 @JsonObject("TgsLinkItem")
 export class TgsLinkItem extends BaseLanguageItem {
@@ -26,6 +28,11 @@ export class TgsLinkItem extends BaseLanguageItem {
             expression: /\*/
           },
           {
+            id: "condition",
+            reference: TgsConditionHeader,
+            iterator: "?"
+          },
+          {
             id: "arrow",
             expression: /=>/
           },
@@ -42,6 +49,16 @@ export class TgsLinkItem extends BaseLanguageItem {
           {
             id: "opener",
             expression: /\*/
+          },
+          {
+            id: "condition",
+            reference: TgsConditionHeader,
+            iterator: "?"
+          },
+          {
+            id: "style",
+            reference: TgsStyleHeader,
+            iterator: "?"
           },
           {
             id: "simpleLinkText",
@@ -77,9 +94,24 @@ export class TgsLinkItem extends BaseLanguageItem {
   @JsonProperty("gl", String, true)
   globalLinkRef = "";
 
+  @JsonProperty("c", TgsConditionHeader, true)
+  condition: TgsConditionHeader = null;
+
+  @JsonProperty("s", TgsStyleHeader, true)
+  style: TgsStyleHeader = null;
+
   constructObject() {
     this.text = this.getFirstValue("blockLink/simpleLinkText@text");
     this.localLinkRef = this.getFirstValue("blockLink/link/ref@localRef");
     this.globalLinkRef = this.getFirstValue("blockLink/link/ref@globalRef");
+
+    if (this.localLinkRef) {
+      this.condition = <TgsConditionHeader>this.getFirstResult("blockLink/condition");
+      this.style = <TgsStyleHeader>this.getFirstResult("blockLink/style");
+    }
+
+    if (this.globalLinkRef) {
+      this.condition = <TgsConditionHeader>this.getFirstResult("directLink/condition");
+    }
   }
 }

@@ -3,6 +3,7 @@ import { JsonObject, JsonProperty } from 'json2typescript';
 import { TgsTemplateExpression } from './tgs-template-expression.class';
 import { TgsDuration } from './tgs-duration.class';
 import { TgsInlineCommand } from './tgs-inline-command.class';
+import { TgsAssignation } from './tgs-assignation.class';
 
 @JsonObject("TgsGameBlockLine")
 export class TgsGameBlockLine extends BaseLanguageItem {
@@ -10,6 +11,10 @@ export class TgsGameBlockLine extends BaseLanguageItem {
   static assertions: AssertionsGroup = {
     type: AssertionsGroupType.OR,
     assertions: [
+      {
+        id: "assignation",
+        reference: TgsAssignation
+      },
       {
         id: "command",
         reference: TgsInlineCommand
@@ -88,6 +93,9 @@ export class TgsGameBlockLine extends BaseLanguageItem {
   @JsonProperty("c", TgsInlineCommand, true)
   command: TgsInlineCommand = null;
 
+  @JsonProperty("a", TgsAssignation, true)
+  assignation: TgsAssignation = null;
+
   constructObject() {
     this.directText = this.getFirstValue("blockline/blockline@text");
     this.template = <TgsTemplateExpression>this.getFirstResult("blockline/template");
@@ -106,6 +114,10 @@ export class TgsGameBlockLine extends BaseLanguageItem {
 
     if (firstKey === "command") {
       this.command = <TgsInlineCommand>this.getFirstResult("command");      
+    }
+
+    if (firstKey === "assignation") {
+      this.assignation = <TgsAssignation>this.getFirstResult("assignation");
     }
   }
 
