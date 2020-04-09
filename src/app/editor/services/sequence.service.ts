@@ -45,8 +45,6 @@ export class SequenceService {
   saveThread() {
     if (this.currentThread) {
       let obj = this.serializer.serializeObject(this.currentThread);
-      console.log(obj);
-      
       this.filesManager.saveToFile(this.threadPath, JSON.stringify(obj));
     } else {
       console.log("No thread to save.");

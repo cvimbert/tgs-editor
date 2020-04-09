@@ -4,9 +4,10 @@ import { TgsBoolean } from './primitive-variables/tgs-boolean.class';
 import { TgsString } from './tgs-string.class';
 import { TgsFloat } from './primitive-variables/tgs-float.class';
 import { JsonObject, JsonProperty, Any } from 'json2typescript';
+import { ValueProvider } from '../interfaces/value-provider.interface';
 
 @JsonObject("TgsValue")
-export class TgsValue extends BaseLanguageItem {
+export class TgsValue extends BaseLanguageItem implements ValueProvider {
 
   static assertions: AssertionsGroup = {
     type: AssertionsGroupType.OR,
@@ -35,6 +36,10 @@ export class TgsValue extends BaseLanguageItem {
 
   @JsonProperty("v", Any, true)
   value: any = null;
+
+  getObjectValue(): any {
+    return this.value;
+  }
 
   constructObject() {
     this.type = this.getFirstKey();

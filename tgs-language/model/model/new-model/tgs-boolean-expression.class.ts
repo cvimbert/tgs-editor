@@ -2,6 +2,7 @@ import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-comp
 import { TgsBoolean } from './primitive-variables/tgs-boolean.class';
 import { TgsVariableReference } from './tgs-variable-reference.class';
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { TgsComparison } from './tgs-comparison.class';
 
 @JsonObject("TgsBooleanExpression")
 export class TgsBooleanExpression extends BaseLanguageItem {
@@ -23,6 +24,10 @@ export class TgsBooleanExpression extends BaseLanguageItem {
       simpleMember: {
         type: AssertionsGroupType.OR,
         assertions: [
+          {
+            id: "comparison",
+            reference: TgsComparison
+          },
           {
             id: "direct",
             reference: TgsBoolean
@@ -62,6 +67,9 @@ export class TgsBooleanExpression extends BaseLanguageItem {
   @JsonProperty("m", TgsBooleanExpression, true)
   member2: TgsBooleanExpression = null;
 
+  @JsonProperty("c", TgsComparison, true)
+  comparison: TgsComparison = null;
+
   constructObject() {
     let member1 = this.getFirstResult("member1");
 
@@ -72,6 +80,10 @@ export class TgsBooleanExpression extends BaseLanguageItem {
 
       case "variable":
         this.variableRef = <TgsVariableReference>member1.getFirstResult("variable");
+        break;
+
+      case "comparison":
+        this.comparison = <TgsComparison>member1.getFirstResult("comparison");
         break;
     }
 
@@ -88,9 +100,11 @@ export class TgsBooleanExpression extends BaseLanguageItem {
     let member1Val: boolean;
 
     if (this.variableRef) {
-      member1Val = this.variableRef.getValue();
-    } else {
+      member1Val = this.variableRef.getObjectValue();
+    } else if (this.directValue) {
       member1Val = this.directValue;
+    } else if (this.comparison) {
+      member1Val = this.comparison.evaluate();
     }
 
     switch(this.operator) {

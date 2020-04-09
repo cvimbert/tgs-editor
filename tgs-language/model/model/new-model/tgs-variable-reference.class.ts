@@ -1,8 +1,9 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { ValueProvider } from '../interfaces/value-provider.interface';
 
 @JsonObject("TgsVariableReference")
-export class TgsVariableReference extends BaseLanguageItem {
+export class TgsVariableReference extends BaseLanguageItem implements ValueProvider {
 
   static assertions: AssertionsGroup = {
     type: AssertionsGroupType.AND,
@@ -23,7 +24,7 @@ export class TgsVariableReference extends BaseLanguageItem {
         assertions: [
           {
             id: "item",
-            expression: /([A-Za-z0-9]+)/,
+            expression: /([A-Za-z][A-Za-z0-0]*)/,
             groups: ["val"]
           }
         ]
@@ -63,7 +64,7 @@ export class TgsVariableReference extends BaseLanguageItem {
     }    
   }
 
-  getValue(): any {
+  getObjectValue(): any {
     return true;
   }
 }
