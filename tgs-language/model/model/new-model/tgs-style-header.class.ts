@@ -48,6 +48,9 @@ export class TgsStyleHeader extends BaseLanguageItem {
   @JsonProperty("bs", [String], true)
   basicStyles: string[] = [];
 
+  @JsonProperty("sd", [String], true)
+  styleDeclarations: string[] = [];
+
   @JsonProperty("td", Number, true)
   typewritingDelay = -1;
 
@@ -64,6 +67,7 @@ export class TgsStyleHeader extends BaseLanguageItem {
     var stylesWhiteList = ["b", "i"];
 
     this.basicStyles = this.styles.filter(style => stylesWhiteList.indexOf(style.name) !== -1).map(style => style.name);
+    this.styleDeclarations = this.styles.filter(style => stylesWhiteList.indexOf(style.name) === -1).map(style => style.name);
     
     let delayArg = this.getArg("delay");
 

@@ -5,6 +5,7 @@ import { TgsString } from './tgs-string.class';
 import { TgsFloat } from './primitive-variables/tgs-float.class';
 import { JsonObject, JsonProperty, Any } from 'json2typescript';
 import { ValueProvider } from '../interfaces/value-provider.interface';
+import { TgsColor } from './tgs-color.class';
 
 @JsonObject("TgsValue")
 export class TgsValue extends BaseLanguageItem implements ValueProvider {
@@ -12,6 +13,10 @@ export class TgsValue extends BaseLanguageItem implements ValueProvider {
   static assertions: AssertionsGroup = {
     type: AssertionsGroupType.OR,
     assertions: [
+      {
+        id: "color",
+        reference: TgsColor
+      },
       {
         id: "duration",
         reference: TgsDuration
@@ -37,6 +42,9 @@ export class TgsValue extends BaseLanguageItem implements ValueProvider {
   @JsonProperty("v", Any, true)
   value: any = null;
 
+  @JsonProperty("c", TgsColor, true)
+  color: TgsColor = null;
+
   getObjectValue(): any {
     return this.value;
   }
@@ -54,6 +62,11 @@ export class TgsValue extends BaseLanguageItem implements ValueProvider {
       case "string":
       case "number":
         this.value = (<any>val).value;
+        break;
+
+      // pas top, mais bon
+      case "color":
+        this.color = <TgsColor>val;
         break;
     }
   }

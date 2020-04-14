@@ -1,19 +1,45 @@
 @headers {
+	extends: Sequence2;
 	name: "Séquence d'initialisation";
     defaultTimeout: 0.02s;
-    fontSize: 19;
+    fontSize: 15;
     fontFamiliy: "Arial";
+}
+
+@style {
+	t1 {
+        paddingBottom: 12;
+        paddingTop: 8;
+        paddingLeft: 20;
+        paddingRight: 20;
+        writingInterval: 0.05s;
+        fontSize: 15;
+    }
+    
+    red {
+    	lineSpacing: 12;
+        color: 0xff0000;
+    }
+    
+    blue {
+    	color: 0x0000ff;
+    }
+    
+    t2 {
+    
+    }
 }
 
 
 #start
-
-
-	[<b, i>Redémarrage
-    ----
+	[<b, i, t1>Redémarrage
+    sdfsdfsdfsdfsdfsd sd fsdfsdf s
+     fsdf sdfsdfsdf sd fdsfsdf
+     sfdfsdfsd sd fsdf deddqsdqsqs
     de la cellule
-    de confinement...]
-    ++++ 3s [points]
+    de confinement...
+        ++++ 3s [points]]
+
     
     >> sound("tick")
     >> yop.int = 5
@@ -23,10 +49,12 @@
     
     [(? yop.string == "oooo")
     	Oui
+        ----
     ]
     
     [(? yop.int < 4)
     	Non
+        ----
     ]
         
    	[(? true)
@@ -45,6 +73,9 @@
     ++++ 3s [points]
     ... intialisation OK
     ++++ 0.8s
+    
+    >> clear()
+    
     Décompression des données IA
     ++++ 3s [points]
     ... décompression OK

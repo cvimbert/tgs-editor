@@ -17,14 +17,14 @@ export class TgsManager {
       let struct = <TgsMainStructure>this.compiler.parseTGSString(text, TgsMainStructure);
       struct.fillObject(struct);
     
-      if (struct.headers && struct.headers.extensionList) {
+      /*if (struct.headers && struct.headers.extensionList) {
         this.loadTgsFiles(struct.headers.extensionList).then(extensions => {
           struct.extensions = extensions;
           resolve(struct);
         }).catch((e: Error) => reject(e));
-      } else {
+      } else {*/
         resolve(struct);
-      }
+      //}
     });
   }
 
@@ -40,14 +40,16 @@ export class TgsManager {
     
           this.store[path] = struct;
     
-          if (struct.headers && struct.headers.extensionList) {
+          /*if (struct.headers && struct.headers.extensionList) {
             this.loadTgsFiles(struct.headers.extensionList).then(extensions => {
               struct.extensions = extensions;
               resolve(struct);
             }).catch((e: Error) => reject(e));
           } else {
             resolve(struct);
-          }
+          }*/
+
+          resolve(struct);
   
         }).catch((e: Error) => reject(e));
       }

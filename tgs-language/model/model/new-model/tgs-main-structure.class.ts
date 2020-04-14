@@ -2,6 +2,7 @@ import { AssertionsGroup, AssertionsGroupType, BaseLanguageItem } from 'tgs-comp
 import { TgsGameBlock } from './tgs-game-block.class';
 import { JsonObject, JsonProperty } from 'json2typescript';
 import { TgsHeaders } from './tgs-headers.class';
+import { TgsStyleDeclaration } from './tgs-style-declaration.class';
 
 @JsonObject("TgsMainStructure")
 export class TgsMainStructure extends BaseLanguageItem {
@@ -12,6 +13,11 @@ export class TgsMainStructure extends BaseLanguageItem {
       {
         id: "headers",
         reference: TgsHeaders,
+        iterator: "?"
+      },
+      {
+        id: "styleDeclaration",
+        reference: TgsStyleDeclaration,
         iterator: "?"
       },
       {
@@ -26,7 +32,10 @@ export class TgsMainStructure extends BaseLanguageItem {
   blocks: TgsGameBlock[] = [];
 
   @JsonProperty("h", TgsHeaders, true)
-  headers: TgsHeaders;
+  headers: TgsHeaders = null;
+
+  @JsonProperty("s", TgsStyleDeclaration, true)
+  styles: TgsStyleDeclaration = null;
 
   // Pas besoin d'être sérialisé... à priori
   extensions: TgsMainStructure[];
@@ -34,11 +43,10 @@ export class TgsMainStructure extends BaseLanguageItem {
   constructObject() {
     this.blocks = <TgsGameBlock[]>this.getResults("gameBlock") || [];
     this.headers = <TgsHeaders>this.getFirstResult("headers");
+    this.styles = <TgsStyleDeclaration>this.getFirstResult("styleDeclaration");
   }
 
   getBlock(id: string): TgsGameBlock {
-    // console.log("get", id, this.extensions);
-    
      let block = this.blocks.find(block => block.id === id);
 
      if (block) {

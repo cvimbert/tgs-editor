@@ -1,0 +1,44 @@
+@headers {
+	name: "Séquence 2";
+}
+
+
+#start
+	
+    Texte start
+
+    * Attente des données d'erreur -> #attente
+    
+
+#resetSystem
+
+	Texte reset
+    
+  * Continuer -> #start
+
+
+#forceSequence
+
+	>> clear()
+
+	Forçage de la séquence principale
+    ++++ 2s [points]
+    Forçage de la routine d'éxécution
+    ++++ 2s [points]
+    Succès
+    
+    * Continuer -> #continue
+
+
+#attente
+
+	Texte attente
+    
+    
+#blocDePlus
+
+	Texte attente
+
+#continue
+
+	Et la suite....

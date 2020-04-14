@@ -41,7 +41,8 @@ export class TgsPath extends BaseLanguageItem {
   separator = "/";
 
   getFullPath(relativeTo?: string): string {
-    return (this.folders || []).join(this.separator) + this.separator + this.baseName;
+    var folders = this.folders || [];
+    return folders.join(this.separator) + (this.folders.length > 0 ? this.separator : "") + this.baseName;
   }
 
   constructObject() {
