@@ -26,19 +26,28 @@
     }
     
     t2 {
+    	backgroundImage: "test";
+    }
     
+    direct {
+    	writingInterval: 0s;
     }
 }
 
 
 #start
-	[<b, i, t1>Redémarrage
+	[<b, i, t1, blue, t2>Redémarrage
     sdfsdfsdfsdfsdfsd sd fsdfsdf s
      fsdf sdfsdfsdf sd fdsfsdf
-     sfdfsdfsd sd fsdf deddqsdqsqs
+     ----
+     [<red>sfdfsdfsd sd fsdf deddqsdqsqs]
+     ----
     de la cellule
     de confinement...
-        ++++ 3s [points]]
+        ++++ 3s [points]
+        [<red>ooooo]
+        ----
+    ]
 
     
     >> sound("tick")
@@ -83,7 +92,7 @@
     Exécution du noyau IA
     ++++ 3s [points]
     
-    [<b, delay(0s)>Erreur 1 !!!
+    [<b, direct>Erreur 1 !!!
     ++++ 1s
     Erreur 1 !!!
     ++++ 1s

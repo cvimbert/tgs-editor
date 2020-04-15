@@ -66,7 +66,7 @@ export class TgsValue extends BaseLanguageItem implements ValueProvider {
 
       // pas top, mais bon
       case "color":
-        this.color = <TgsColor>val;
+        this.color = <TgsColor>val;        
         break;
     }
   }

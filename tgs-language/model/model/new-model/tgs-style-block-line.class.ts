@@ -1,6 +1,7 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
 import { JsonObject, JsonProperty, Any } from 'json2typescript';
 import { TgsValue } from './tgs-value.class';
+import { TgsColor } from './tgs-color.class';
 
 @JsonObject("TgsStyleBlockLine")
 export class TgsStyleBlockLine extends BaseLanguageItem {
@@ -65,16 +66,29 @@ export class TgsStyleBlockLine extends BaseLanguageItem {
   @JsonProperty("v", Any, true)
   values: any[] = [];
 
+  @JsonProperty("c", [TgsColor], true)
+  colors: TgsColor[] = [];
+
   constructObject() {
     this.id = this.getFirstValue("opener@name");
 
     let res2 = <TgsValue[]>this.getResults("argsList/argWithComma/arg");
 
     if (res2) {
-      this.values.push(...res2.map(res => res.getObjectValue()));
+      res2.forEach(res => {
+        this.pushVal(res);
+      });
     }
 
     let res1 = <TgsValue>this.getFirstResult("argsList/arg");
-    this.values.push(res1.getObjectValue());    
+    this.pushVal(res1);
+  }
+
+  private pushVal(res: TgsValue) {
+    if (res.type === "color") {      
+      this.colors.push(res.color);
+    } else {
+      this.values.push(res.getObjectValue());
+    }
   }
 }

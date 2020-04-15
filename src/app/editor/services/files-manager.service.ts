@@ -20,7 +20,7 @@ export class FilesManagerService {
   }
 
   loadFile(path: string): Promise<string> {
-    return new Promise((resolve: (value: string) => void, reject: (err: Error) => void) => {
+    return new Promise((resolve: (value: string) => void, reject: (err: Error) => void) => {      
       this.fs.readFile(path, "utf8", (err: Error, data: string) => {
         if (err) {
           reject(err);

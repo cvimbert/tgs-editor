@@ -1,7 +1,7 @@
 import { BaseLanguageItem, AssertionsGroup, AssertionsGroupType } from 'tgs-compiler';
 import { JsonObject, JsonProperty } from 'json2typescript';
 
-JsonObject("TgsColor")
+@JsonObject("TgsColor")
 export class TgsColor extends BaseLanguageItem {
 
   static assertions: AssertionsGroup = {

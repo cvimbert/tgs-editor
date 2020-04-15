@@ -7,6 +7,7 @@ import { SequenceService } from '../../services/sequence.service';
 import { TgsGameBlock } from 'tgs-model/model/new-model/tgs-game-block.class';
 import { Subject } from 'rxjs';
 import { PreviewDisplayComponent } from '../preview-display/preview-display.component';
+import { ElectronService } from 'ngx-electron';
 
 @Component({
   selector: 'sequence-edit',
@@ -16,7 +17,7 @@ import { PreviewDisplayComponent } from '../preview-display/preview-display.comp
 export class SequenceEditComponent implements OnInit {
 
   content = "";
-  private path = "projects/p1/index.tgs";
+  private path = "p1/index";
   private threadPath = "projects/p1/index-thread.json";
   private compiler = new Compiler();
   navigationActivated = false;
@@ -33,10 +34,18 @@ export class SequenceEditComponent implements OnInit {
 
   constructor(
     private filesManager: FilesManagerService,
-    public sequenceService: SequenceService
+    public sequenceService: SequenceService,
+    public electronService: ElectronService
   ) { }
 
   ngOnInit() {
+
+    let defaultPath = localStorage["default-path"];
+
+    if (defaultPath != null) {
+      this.path = defaultPath;
+    }
+
     this.loadFile(this.path);
     this.sequenceService.loadThread(this.threadPath);
 
@@ -53,7 +62,9 @@ export class SequenceEditComponent implements OnInit {
 
   loadFile(path: string) {
     this.content = "";
-    this.filesManager.loadFile(path).then(content => {
+    this.filesManager.loadFile("projects/" + path + ".tgs").then(content => {
+      this.path = path;
+      localStorage["default-path"] = path;
       this.content = content;
 
       setTimeout(() => this.editor.codeMirror.getDoc().clearHistory());
@@ -86,8 +97,30 @@ export class SequenceEditComponent implements OnInit {
     this.sequenceService.exportSequence();
   }
 
+  openFile() {
+    let defaultPath = this.electronService.remote.app.getAppPath() + "\\projects\\";
+
+    this.electronService.remote.dialog.showOpenDialog({
+      defaultPath: defaultPath,
+      title: "Open TGS file",
+      properties: ['openFile'],
+      filters: [
+        { name: "Tgs", extensions: ["tgs"] }
+      ]
+    }).then(resp => {
+      if (!resp.canceled) {
+        if (resp.filePaths.length === 1) {
+          let path = resp.filePaths[0].replace(defaultPath + "/", "").replace(/\\/g, "/").replace(/\.tgs$/, "");
+          console.log(path);
+          this.loadFile(path);
+
+        }
+      }
+    });
+  }
+
   saveFile(path: string) {
-    this.filesManager.saveToFile(path, this.content).then(() => console.log("File saved."));
+    this.filesManager.saveToFile("projects/" + path + ".tgs", this.content).then(() => console.log("File saved."));
     this.sequenceService.saveThread();
   }
 
@@ -122,6 +155,10 @@ export class SequenceEditComponent implements OnInit {
 
         case "e":
           this.exportFile();
+          break;
+
+        case "o":
+          this.openFile();
           break;
       }
     }
