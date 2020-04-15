@@ -51,10 +51,11 @@ export class SequenceService {
     }
   }
 
-  exportSequence() {
+  exportSequence(path: string) {
     let json = this.serializer.serializeObject(this.currentSequence);
 
-    this.filesManager.saveToFile("C:/unity/Spaceship/Assets/Resources/Sequence1.json", JSON.stringify(json));
+    // en attendant une conf
+    this.filesManager.saveToFile(`C:/unity/Spaceship/Assets/Resources/Definitions/${ path }.json`, JSON.stringify(json));
     console.log("exported");
   }
 }

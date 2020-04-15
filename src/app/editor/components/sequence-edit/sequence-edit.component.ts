@@ -94,7 +94,7 @@ export class SequenceEditComponent implements OnInit {
   }
 
   exportFile() {
-    this.sequenceService.exportSequence();
+    this.sequenceService.exportSequence(this.path);
   }
 
   openFile() {
@@ -110,6 +110,7 @@ export class SequenceEditComponent implements OnInit {
     }).then(resp => {
       if (!resp.canceled) {
         if (resp.filePaths.length === 1) {          
+          this.sequenceService.currentThread.reset();
           let path = resp.filePaths[0].replace(defaultPath, "").replace(/\\/g, "/").replace(/\.tgs$/, "");
           this.loadFile(path);
         }
