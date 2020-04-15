@@ -109,11 +109,9 @@ export class SequenceEditComponent implements OnInit {
       ]
     }).then(resp => {
       if (!resp.canceled) {
-        if (resp.filePaths.length === 1) {
-          let path = resp.filePaths[0].replace(defaultPath + "/", "").replace(/\\/g, "/").replace(/\.tgs$/, "");
-          console.log(path);
+        if (resp.filePaths.length === 1) {          
+          let path = resp.filePaths[0].replace(defaultPath, "").replace(/\\/g, "/").replace(/\.tgs$/, "");
           this.loadFile(path);
-
         }
       }
     });
